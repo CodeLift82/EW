@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elliott Wave — Complete Master Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold2: #e8c87a;
+  --gdim: #7a6230;
+  --bg:   #07090e;
+  --bg2:  #0b0e17;
+  --bg3:  #0f1320;
+  --surf: #141926;
+  --surf2:#1b2238;
+  --surf3:#222d48;
+  --bdr:  #1e2840;
+  --bdr2: #283550;
+  --txt:  #d8dce8;
+  --dim:  #5a6585;
+  --grn:  #3ddc84;
+  --red:  #f04060;
+  --blue: #4aa8f8;
+  --cyan: #00ddc8;
+  --prp:  #a870ff;
+  --org:  #ff8a30;
+  --ylw:  #ffd060;
+  --pnk:  #ff60a8;
+  --teal: #00bfa5;
+
+  /* Wave colors */
+  --w1:#3ddc84; --w2:#f04060; --w3:#00ddc8; --w4:#ff8a30; --w5:#a870ff;
+  --wa:#f04060; --wb:#4aa8f8; --wc:#f04060;
+
+  /* Method colors */
+  --m1:#c9a84c; --m2:#3ddc84; --m3:#4aa8f8; --m4:#a870ff;
+  --m5:#ff8a30; --m6:#00ddc8; --m7:#ff60a8; --m8:#ffd060;
+  --m9:#f04060; --m10:#3ddc84;
+
+  /* Irregular colors */
+  --irr1:#ff6b9d; --irr2:#c77dff; --irr3:#4cc9f0; --irr4:#f8961e;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+  line-height:1.75;
+  min-height:100vh;
+}
+
+/* ═══ HEADER ═══ */
+.header{
+  position:relative;
+  background:linear-gradient(135deg,#07090e 0%,#0d1020 50%,#07090e 100%);
+  border-bottom:1px solid var(--gdim);
+  overflow:hidden;
+}
+.header::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 100% at 80% 40%,rgba(201,168,76,0.08) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 80% at 10% 80%,rgba(0,221,200,0.04) 0%,transparent 60%);
+  pointer-events:none;
+}
+.hdr-inner{
+  display:grid;grid-template-columns:auto 1fr auto;
+  align-items:stretch;min-height:170px;
+  position:relative;z-index:1;
+}
+.hdr-accent{
+  width:5px;
+  background:linear-gradient(180deg,var(--gold) 0%,var(--cyan) 40%,var(--prp) 70%,var(--irr1) 100%);
+}
+.hdr-content{padding:44px 52px;}
+.hdr-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.hdr-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:58px;letter-spacing:3px;line-height:1;color:var(--txt);
+}
+.hdr-title span{color:var(--gold);}
+.hdr-sub{
+  font-size:11px;color:var(--dim);margin-top:10px;
+  font-family:'IBM Plex Sans',sans-serif;max-width:640px;line-height:1.7;
+}
+.hdr-badges{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;}
+.hdr-badge{
+  padding:3px 10px;border-radius:3px;font-size:9px;letter-spacing:1.5px;
+  text-transform:uppercase;font-weight:600;border:1px solid;
+}
+.hdr-meta{
+  padding:28px 40px;display:flex;flex-direction:column;gap:14px;
+  justify-content:center;border-left:1px solid var(--bdr);min-width:180px;
+}
+.hdr-stat{text-align:center;}
+.hdr-stat .val{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:38px;color:var(--gold);line-height:1;
+}
+.hdr-stat .lbl{font-size:9px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;}
+
+/* ═══ NAV ═══ */
+.nav{
+  background:var(--bg2);border-bottom:1px solid var(--bdr);
+  display:flex;padding:0 52px;overflow-x:auto;gap:0;
+  position:sticky;top:0;z-index:200;
+}
+.nb{
+  background:none;border:none;color:var(--dim);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  padding:14px 18px;cursor:pointer;
+  border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;
+}
+.nb:hover{color:var(--txt);}
+.nb.on{color:var(--gold);border-bottom-color:var(--gold);}
+.nb.irr-btn{color:var(--irr1)!important;}
+.nb.irr-btn.on{border-bottom-color:var(--irr1);}
+
+/* ═══ MAIN ═══ */
+.main{padding:40px 52px;max-width:1500px;margin:0 auto;}
+.sec{display:none;animation:fi .3s ease;}
+.sec.on{display:block;}
+@keyframes fi{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* ═══ SECTION TITLES ═══ */
+.st{
+  font-family:'Playfair Display',serif;
+  font-size:32px;font-weight:900;
+  color:var(--gold);margin-bottom:6px;letter-spacing:-0.5px;
+}
+.st.irr{color:var(--irr1);}
+.ss{font-size:9px;color:var(--dim);letter-spacing:3px;text-transform:uppercase;margin-bottom:28px;}
+
+/* ═══ GRID LAYOUTS ═══ */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.wave-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;margin-bottom:30px;}
+
+/* ═══ CARDS ═══ */
+.card{
+  background:var(--surf);border:1px solid var(--bdr);
+  border-radius:8px;padding:20px;
+}
+.card h3{
+  font-family:'Playfair Display',serif;font-size:16px;
+  color:var(--gold);margin-bottom:12px;
+}
+.card.irr{border-color:rgba(255,107,157,0.3);}
+.card.irr h3{color:var(--irr1);}
+
+/* Wave card (expandable) */
+.wcard{
+  background:var(--surf);border:1px solid var(--bdr);
+  border-radius:8px;overflow:hidden;
+  transition:border-color .2s,transform .2s;cursor:pointer;
+}
+.wcard:hover{border-color:var(--gdim);transform:translateY(-2px);}
+.wcard.open{border-color:var(--gold);}
+.wcard.irr-card:hover{border-color:var(--irr1);}
+.wcard.irr-card.open{border-color:var(--irr1);}
+.wcard-head{
+  display:flex;align-items:center;gap:14px;
+  padding:18px 20px;background:var(--bg3);
+}
+.wbadge{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:16px;font-weight:700;flex-shrink:0;
+}
+.wcard-head h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);}
+.wcard.irr-card .wcard-head h3{color:var(--irr1);}
+.wcard-head p{font-size:10px;color:var(--dim);margin-top:2px;letter-spacing:1px;}
+.wcard-body{padding:18px 20px;display:none;}
+.wcard.open .wcard-body{display:block;}
+
+/* Method card */
+.mcard{
+  background:var(--surf);border:1px solid var(--bdr);
+  border-radius:10px;overflow:hidden;margin-bottom:20px;transition:border-color .2s;
+}
+.mcard:hover{border-color:var(--bdr2);}
+.mcard-head{display:flex;align-items:center;gap:0;cursor:pointer;}
+.mcard-stripe{width:4px;align-self:stretch;flex-shrink:0;}
+.mcard-icon{
+  width:56px;height:56px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+  border-right:1px solid var(--bdr);background:var(--bg3);
+}
+.mcard-info{flex:1;padding:14px 18px;}
+.mcard-info h3{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size:15px;font-weight:600;margin-bottom:3px;
+}
+.mcard-info p{font-size:10px;color:var(--dim);letter-spacing:.5px;}
+.mcard-badges{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.mcard-toggle{
+  width:48px;height:48px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--dim);font-size:16px;transition:transform .25s;flex-shrink:0;
+}
+.mcard.open .mcard-toggle{transform:rotate(180deg);}
+.mcard-body{display:none;border-top:1px solid var(--bdr);}
+.mcard.open .mcard-body{display:block;}
+.mbody{padding:22px 24px;}
+
+/* ═══ RULES / ALERTS ═══ */
+.rule{
+  display:flex;gap:10px;padding:6px 10px;
+  border-left:2px solid;border-radius:0 4px 4px 0;
+  margin-bottom:5px;background:rgba(255,255,255,0.02);font-size:12px;
+}
+.r-gold{border-color:var(--gold);} .r-grn{border-color:var(--grn);}
+.r-red{border-color:var(--red);} .r-blue{border-color:var(--blue);}
+.r-cyan{border-color:var(--cyan);} .r-prp{border-color:var(--prp);}
+.r-org{border-color:var(--org);} .r-warn{border-color:var(--ylw);}
+.r-irr{border-color:var(--irr1);}
+
+.al{display:flex;gap:10px;padding:11px 15px;border-radius:7px;font-size:11.5px;margin:12px 0;}
+.al-gold{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.25);color:var(--gold2);}
+.al-grn{background:rgba(61,220,132,.07);border:1px solid rgba(61,220,132,.2);color:var(--grn);}
+.al-red{background:rgba(240,64,96,.07);border:1px solid rgba(240,64,96,.2);color:var(--red);}
+.al-blue{background:rgba(74,168,248,.07);border:1px solid rgba(74,168,248,.2);color:var(--blue);}
+.al-warn{background:rgba(255,208,96,.07);border:1px solid rgba(255,208,96,.25);color:var(--ylw);}
+.al-irr{background:rgba(255,107,157,.07);border:1px solid rgba(255,107,157,.25);color:var(--irr1);}
+
+/* ═══ BADGES ═══ */
+.bdg{display:inline-block;padding:2px 8px;border-radius:3px;font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:600;}
+.bdg-gold{background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
+.bdg-grn{background:rgba(61,220,132,.12);color:var(--grn);border:1px solid rgba(61,220,132,.25);}
+.bdg-red{background:rgba(240,64,96,.12);color:var(--red);border:1px solid rgba(240,64,96,.25);}
+.bdg-blue{background:rgba(74,168,248,.12);color:var(--blue);border:1px solid rgba(74,168,248,.25);}
+.bdg-prp{background:rgba(168,112,255,.12);color:var(--prp);border:1px solid rgba(168,112,255,.25);}
+.bdg-org{background:rgba(255,138,48,.12);color:var(--org);border:1px solid rgba(255,138,48,.25);}
+.bdg-cyan{background:rgba(0,221,200,.12);color:var(--cyan);border:1px solid rgba(0,221,200,.25);}
+.bdg-warn{background:rgba(255,208,96,.12);color:var(--ylw);border:1px solid rgba(255,208,96,.25);}
+.bdg-irr{background:rgba(255,107,157,.15);color:var(--irr1);border:1px solid rgba(255,107,157,.3);}
+.bdg-irr2{background:rgba(199,125,255,.12);color:var(--irr2);border:1px solid rgba(199,125,255,.3);}
+
+/* ═══ TABLE ═══ */
+.tbl{width:100%;border-collapse:collapse;font-size:11px;margin:10px 0;}
+.tbl th{background:var(--bg3);color:var(--dim);padding:7px 11px;text-align:left;font-size:9px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid var(--bdr);}
+.tbl td{padding:7px 11px;border-bottom:1px solid var(--bdr);}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:var(--surf2);}
+.tbl .hl{background:rgba(201,168,76,.05);}
+.tv{color:var(--cyan);font-weight:600;}
+.tl{color:var(--gold);}
+
+/* ═══ INNER TABS ═══ */
+.itabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap;}
+.itab{
+  background:var(--surf2);border:1px solid var(--bdr);
+  color:var(--dim);font-family:'IBM Plex Mono',monospace;
+  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:6px 14px;border-radius:4px;cursor:pointer;transition:all .2s;
+}
+.itab:hover{border-color:var(--bdr2);color:var(--txt);}
+.itab.on{background:rgba(201,168,76,.12);border-color:var(--gold);color:var(--gold2);}
+.ic{display:none;}
+.ic.on{display:block;animation:fi .2s ease;}
+
+/* ═══ CHART CONTAINER ═══ */
+.cw{background:var(--bg);border:1px solid var(--bdr);border-radius:7px;padding:16px;margin:12px 0;}
+.cw h5{font-size:9px;color:var(--dim);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;}
+svg text{font-family:'IBM Plex Mono',monospace;}
+
+/* ═══ DEGREE SCALE ═══ */
+.deg-scale{display:flex;align-items:center;gap:0;margin:20px 0;overflow-x:auto;padding-bottom:4px;}
+.deg-item{
+  background:var(--surf);border:1px solid var(--bdr);
+  padding:10px 14px;text-align:center;flex:1;min-width:90px;position:relative;
+}
+.deg-item::after{
+  content:'▶';position:absolute;right:-10px;top:50%;transform:translateY(-50%);
+  color:var(--bdr);font-size:12px;z-index:1;
+}
+.deg-item:last-child::after{display:none;}
+.deg-item .dn{font-size:9px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;}
+.deg-item .dt{font-size:11px;color:var(--gold);font-weight:600;margin-top:4px;}
+.deg-item .ds{font-size:13px;color:var(--cyan);margin-top:2px;font-family:'Playfair Display',serif;}
+
+/* ═══ MORPH / WAVE MORPHING ═══ */
+.morph-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0;}
+.morph-card{background:var(--surf);border:1px solid var(--bdr);border-radius:8px;padding:20px;}
+.morph-card h3{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);margin-bottom:12px;}
+
+/* ═══ CHECKLIST ═══ */
+.chk{list-style:none;}
+.chk li{padding:4px 0;font-size:11.5px;display:flex;gap:8px;align-items:flex-start;}
+.chk li::before{content:'◆';color:var(--gold);font-size:8px;margin-top:4px;flex-shrink:0;}
+
+/* ═══ FAIL / SOL BOXES ═══ */
+.failbox{
+  background:rgba(240,64,96,.06);border:1px solid rgba(240,64,96,.2);
+  border-left:4px solid var(--red);border-radius:6px;padding:16px 18px;margin:12px 0;
+}
+.failbox h4{color:var(--red);font-size:12px;margin-bottom:8px;font-family:'IBM Plex Sans',sans-serif;}
+.solbox{
+  background:rgba(61,220,132,.05);border:1px solid rgba(61,220,132,.2);
+  border-left:4px solid var(--grn);border-radius:6px;padding:16px 18px;margin:12px 0;
+}
+.solbox h4{color:var(--grn);font-size:12px;margin-bottom:8px;font-family:'IBM Plex Sans',sans-serif;}
+.irrbox{
+  background:rgba(255,107,157,.06);border:1px solid rgba(255,107,157,.2);
+  border-left:4px solid var(--irr1);border-radius:6px;padding:16px 18px;margin:12px 0;
+}
+.irrbox h4{color:var(--irr1);font-size:12px;margin-bottom:8px;font-family:'IBM Plex Sans',sans-serif;}
+
+/* ═══ RSI SPECIFIC ═══ */
+.rsi-meter{
+  background:var(--bg);border:1px solid var(--bdr);border-radius:8px;
+  overflow:hidden;margin:12px 0;
+}
+.rsi-bar-wrap{display:flex;height:32px;position:relative;}
+.rsi-zone{display:flex;align-items:center;justify-content:center;font-size:9px;letter-spacing:1px;}
+.rsi-pointer{position:absolute;top:0;width:2px;height:100%;background:var(--gold);}
+
+/* ═══ IRR WAVE DIAGRAM ═══ */
+.irr-type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin:20px 0;}
+.irr-type-card{
+  background:var(--surf);border:1px solid rgba(255,107,157,0.25);
+  border-radius:10px;overflow:hidden;
+}
+.irr-type-head{
+  padding:14px 18px;
+  background:linear-gradient(90deg,rgba(255,107,157,0.12) 0%,transparent 100%);
+  border-bottom:1px solid rgba(255,107,157,0.2);
+}
+.irr-type-head h3{font-family:'Playfair Display',serif;font-size:15px;color:var(--irr1);margin-bottom:3px;}
+.irr-type-head p{font-size:10px;color:var(--dim);}
+.irr-type-body{padding:16px 18px;}
+
+/* ═══ SCROLL ═══ */
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--gdim);}
+
+/* ═══ FIB ═══ */
+.fib-ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:20px 0;}
+.fib-ref-card{
+  background:var(--surf);border:1px solid var(--bdr);
+  border-radius:6px;padding:14px;text-align:center;
+}
+.fib-ref-card .ratio{font-size:22px;color:var(--cyan);font-weight:700;}
+.fib-ref-card .origin{font-size:9px;color:var(--dim);letter-spacing:1px;margin-top:2px;}
+.fib-ref-card .uses{font-size:10px;color:var(--txt);margin-top:8px;line-height:1.5;}
+
+hr{border:none;border-top:1px solid var(--bdr);margin:18px 0;}
+
+/* ═══ SUMMARY CARDS ═══ */
+.sum-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin:20px 0;}
+.sum-card{background:var(--surf);border:1px solid var(--bdr);border-radius:8px;padding:16px 18px;border-top:3px solid;}
+.sum-card h4{font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:600;margin-bottom:8px;}
+.sum-card p{font-size:11px;color:var(--dim);line-height:1.7;}
+
+@media(max-width:768px){
+  .hdr-content{padding:30px 20px;}
+  .hdr-title{font-size:38px;}
+  .hdr-meta{display:none;}
+  .main{padding:24px 16px;}
+  .nav{padding:0 16px;}
+  .g2,.g3,.g4,.morph-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<div class="header">
+  <div class="hdr-inner">
+    <div class="hdr-accent"></div>
+    <div class="hdr-content">
+      <div class="hdr-label">Complete Master Reference · All Patterns · All Methods · Irregular Waves</div>
+      <div class="hdr-title">ELLIOTT <span>WAVE</span></div>
+      <div class="hdr-sub">The definitive analyst reference — impulse & corrective theory, identification methods, full RSI confluence system, Fibonacci Probability Atlas, wave morphing, irregular patterns, and degree analysis. Five guides unified.</div>
+      <div class="hdr-badges">
+        <span class="hdr-badge" style="color:var(--gold);border-color:var(--gdim);">All Wave Types</span>
+        <span class="hdr-badge" style="color:var(--cyan);border-color:#006655;">Fib Probability Atlas</span>
+        <span class="hdr-badge" style="color:var(--grn);border-color:#1a5530;">10 ID Methods</span>
+        <span class="hdr-badge" style="color:var(--blue);border-color:#1a3a60;">Full RSI System</span>
+        <span class="hdr-badge" style="color:var(--irr1);border-color:rgba(255,107,157,.4);">Irregular Waves ★</span>
+      </div>
+    </div>
+    <div class="hdr-meta">
+      <div class="hdr-stat"><div class="val">11</div><div class="lbl">Sections</div></div>
+      <div class="hdr-stat"><div class="val">80+</div><div class="lbl">Fib Scenarios</div></div>
+      <div class="hdr-stat"><div class="val">10</div><div class="lbl">ID Methods</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ NAV ═══════════ -->
+<div class="nav">
+  <button class="nb on" onclick="show('overview',this)">① Overview</button>
+  <button class="nb" onclick="show('impulse',this)">② Impulse Waves</button>
+  <button class="nb" onclick="show('corrective',this)">③ Corrective Waves</button>
+  <button class="nb" onclick="show('complex',this)">④ Complex Corrections</button>
+  <button class="nb" onclick="show('diagonals',this)">⑤ Diagonals</button>
+  <button class="nb irr-btn" onclick="show('irregular',this)">★ Irregular Waves</button>
+  <button class="nb" onclick="show('fibonacci',this)">⑥ Fib Atlas</button>
+  <button class="nb" onclick="show('methods',this)">⑦ ID Methods</button>
+  <button class="nb" onclick="show('rsi',this)">⑧ RSI System</button>
+  <button class="nb" onclick="show('morph',this)">⑨ Wave Morphing</button>
+  <button class="nb" onclick="show('degrees',this)">⑩ Degrees</button>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════════ SECTION: OVERVIEW ═══════════════════════ -->
+<div id="sec-overview" class="sec on">
+  <div class="st">The Elliott Wave Principle</div>
+  <div class="ss">Foundation · Market Psychology · The Two Families</div>
+
+  <div class="al al-gold"><span>ℹ</span><span>R.N. Elliott discovered in the 1930s that markets move in repetitive fractal patterns reflecting collective human psychology — oscillating between optimism and pessimism, between impulse and correction. Every wave degree, from Grand Supercycle to Subminuette, follows the same 5–3 structure.</span></div>
+
+  <div class="g2" style="margin:20px 0;">
+    <div class="card">
+      <h3>🌊 The Two Wave Families</h3>
+      <div class="rule r-grn" style="margin-bottom:8px;">
+        <div><strong>MOTIVE WAVES</strong> — move with the larger trend. Always 5 sub-waves. Purpose: generate progress.<br>
+        Types: Impulse, Leading Diagonal, Ending Diagonal</div>
+      </div>
+      <div class="rule r-org">
+        <div><strong>CORRECTIVE WAVES</strong> — move against the larger trend. Always 3 sub-waves (or multiples). Purpose: correct prior progress.<br>
+        Types: Zigzag, Flat, Triangle, Irregular, Complex combos</div>
+      </div>
+      <div class="rule r-irr" style="margin-top:8px;">
+        <div><strong>IRREGULAR WAVES ★</strong> — Special corrective structures where Wave B exceeds the start of Wave A, creating unexpected extremes before C reversal.<br>
+        Types: Irregular Flat, Irregular Failure, Running Correction</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>📐 The 5–3 Golden Rule</h3>
+      <p style="font-size:12px;color:var(--dim);margin-bottom:10px;">Every wave — no matter how large or small — unfolds in this same fractal structure:</p>
+      <div style="text-align:center;padding:16px;background:var(--bg);border-radius:6px;border:1px solid var(--bdr);">
+        <span style="font-size:30px;color:var(--gold);font-family:'Playfair Display',serif;letter-spacing:6px;">5 — 3</span>
+        <div style="font-size:10px;color:var(--dim);margin-top:8px;">MOTIVE (5) + CORRECTIVE (3) = COMPLETE CYCLE (8)</div>
+      </div>
+      <div style="margin-top:14px;">
+        <div class="rule r-gold">Each motive wave sub-divides into 5 smaller waves</div>
+        <div class="rule r-org">Each corrective wave sub-divides into 3 smaller waves</div>
+        <div class="rule r-cyan">The 5-wave impulse becomes wave 1 of the next larger degree</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cw">
+    <h5>Complete Pattern Family — Quick Reference</h5>
+    <table class="tbl">
+      <tr><th>Pattern</th><th>Structure</th><th>Position</th><th>Key Fib</th><th>Signal</th></tr>
+      <tr class="hl"><td class="tl">Impulse</td><td>5-5-5-5-5</td><td>Any motive wave</td><td>W3 = 1.618×W1</td><td>Follow trend</td></tr>
+      <tr><td class="tl">Leading Diagonal</td><td>5-3-5-3-5 or 3s</td><td>W1 or WA only</td><td>W3 = 0.618–1.0×W1</td><td>New trend starting</td></tr>
+      <tr class="hl"><td class="tl">Ending Diagonal</td><td>3-3-3-3-3</td><td>W5 or WC only</td><td>W3 = 0.618×W1</td><td>Reversal imminent</td></tr>
+      <tr><td class="tl">Zigzag</td><td>5-3-5</td><td>W2, WA, WX</td><td>C = 1.0×A</td><td>Sharp correction</td></tr>
+      <tr class="hl"><td class="tl">Flat (Regular)</td><td>3-3-5</td><td>W2, W4, WB</td><td>C = 1.0×A</td><td>Sideways correction</td></tr>
+      <tr><td class="tl">Expanded Flat</td><td>3-3-5</td><td>W2, W4, WB</td><td>C = 1.618×A</td><td>B new extreme then C</td></tr>
+      <tr class="hl"><td class="tl">Running Flat</td><td>3-3-5</td><td>W4 usually</td><td>C fails to reach A</td><td>Very strong trend</td></tr>
+      <tr><td class="tl" style="color:var(--irr1);">★ Irregular Flat</td><td>3-3-5</td><td>W2, W4, WB</td><td>B &gt; 100% A; C = 1.0–1.618×A</td><td>B trap, then surprise C</td></tr>
+      <tr class="hl"><td class="tl" style="color:var(--irr1);">★ Irregular Failure</td><td>3-3-5</td><td>W5 or WC</td><td>C fails to exceed A end</td><td>Exhaustion → sharp reversal</td></tr>
+      <tr><td class="tl" style="color:var(--irr1);">★ Running Correction</td><td>3-3-5 or 5-3-5</td><td>W2, W4</td><td>Entire pattern above/below W1 end</td><td>Explosive continuation signal</td></tr>
+      <tr class="hl"><td class="tl">Triangle</td><td>3-3-3-3-3</td><td>W4, WB, WX</td><td>Each leg 0.618× prior</td><td>Thrust follows</td></tr>
+      <tr><td class="tl">Double Three</td><td>W-X-Y</td><td>W2, W4, WX</td><td>X = 0.382–0.618×W</td><td>Extended sideways</td></tr>
+      <tr class="hl"><td class="tl">Triple Three</td><td>W-X-Y-X-Z</td><td>Any correction</td><td>Complex — rare</td><td>Long consolidation</td></tr>
+    </table>
+  </div>
+
+  <div class="al al-gold" style="margin-top:20px;">
+    <span>★</span>
+    <span><strong>Three Hard Rules (Never Break):</strong> (1) Wave 2 never retraces more than 100% of Wave 1. (2) Wave 3 is never the shortest impulse wave. (3) Wave 4 never overlaps Wave 1 price territory (except in diagonals). Violation of any rule = wrong count.</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SECTION: IMPULSE ═══════════════════════ -->
+<div id="sec-impulse" class="sec">
+  <div class="st">Impulse Waves</div>
+  <div class="ss">The Engine of Trend — 5-Wave Motive Structure · All Rules · Extensions · Fibonacci Probabilities</div>
+
+  <div class="itabs">
+    <button class="itab on" onclick="itab(this,'imp-rules')">Rules & Guidelines</button>
+    <button class="itab" onclick="itab(this,'imp-w1')">Wave 1</button>
+    <button class="itab" onclick="itab(this,'imp-w2')">Wave 2</button>
+    <button class="itab" onclick="itab(this,'imp-w3')">Wave 3</button>
+    <button class="itab" onclick="itab(this,'imp-w4')">Wave 4</button>
+    <button class="itab" onclick="itab(this,'imp-w5')">Wave 5</button>
+    <button class="itab" onclick="itab(this,'imp-ext')">Extensions</button>
+  </div>
+
+  <!-- RULES OVERVIEW -->
+  <div id="imp-rules" class="ic on">
+    <div class="al al-gold"><span>ℹ</span><span>An impulse wave is the most powerful structure in EW theory — 5 waves in the direction of the trend, each sub-dividing further. Waves 1, 3, and 5 are motive; Waves 2 and 4 are corrective. Three hard rules can never be broken.</span></div>
+    <div class="g2" style="margin-top:16px;">
+      <div>
+        <div class="card" style="border-color:rgba(240,64,96,.3);">
+          <h3 style="color:var(--red);">🔴 The 3 Unbreakable Rules</h3>
+          <div class="rule r-red"><strong>RULE 1:</strong> Wave 2 NEVER retraces more than 100% of Wave 1. If it does → not Wave 2.</div>
+          <div class="rule r-red"><strong>RULE 2:</strong> Wave 3 is NEVER the shortest among Waves 1, 3, and 5. W3 must be longer than either W1 or W5.</div>
+          <div class="rule r-red"><strong>RULE 3:</strong> Wave 4 NEVER enters the price territory of Wave 1 (no overlap). Exception: diagonals only.</div>
+          <div class="al al-red" style="margin-top:12px;"><span>✗</span><span>Any violation of the above rules means the wave count is incorrect. Do not rationalize — recount.</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h3 style="color:var(--gold);">🟡 Guidelines (High Probability)</h3>
+          <div class="rule r-gold">Wave 3 is most commonly the longest and strongest wave</div>
+          <div class="rule r-gold">Wave 2 and Wave 4 tend to alternate in form (Alternation Guideline)</div>
+          <div class="rule r-gold">Wave 5 often equals Wave 1 in length, or is a Fibonacci ratio of it</div>
+          <div class="rule r-gold">Waves 2 &amp; 4 together tend to take similar time (time equality)</div>
+          <div class="rule r-gold">The end of Wave 5 often meets a channel line drawn from Wave 3 top parallel to W1–W2 line</div>
+          <div class="rule r-cyan">In any impulse, ONE wave will extend — usually W3, sometimes W1 or W5</div>
+        </div>
+      </div>
+    </div>
+    <div class="cw" style="margin-top:16px;">
+      <h5>Wave 2 vs Wave 4 — Alternation Matrix</h5>
+      <table class="tbl">
+        <tr><th>If Wave 2 is…</th><th>Expect Wave 4 to be…</th><th>Logic</th></tr>
+        <tr class="hl"><td>Sharp Zigzag (fast, deep)</td><td class="tv">Flat or Triangle (slow, shallow)</td><td>Alternation in form</td></tr>
+        <tr><td>Flat (sideways)</td><td class="tv">Sharp Zigzag (fast, deep)</td><td>Alternation in form</td></tr>
+        <tr class="hl"><td>Simple (single pattern)</td><td class="tv">Complex (double/triple)</td><td>Alternation in complexity</td></tr>
+        <tr><td>Deep retrace (61.8–78.6%)</td><td class="tv">Shallow retrace (23.6–38.2%)</td><td>Alternation in depth</td></tr>
+        <tr class="hl"><td>Quick (few bars)</td><td class="tv">Time-consuming (many bars)</td><td>Alternation in time</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- WAVE 1 -->
+  <div id="imp-w1" class="ic">
+    <div class="g2">
+      <div class="card">
+        <h3 style="color:var(--grn);">Wave 1 — The Initiator</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:14px;">The first motive wave. Usually the hardest to identify in real-time — the majority still believe the prior trend is intact.</p>
+        <div class="rule r-grn">Most traders misread W1 as a relief rally within a downtrend</div>
+        <div class="rule r-grn">Sub-divides into 5 smaller waves (impulse or leading diagonal)</div>
+        <div class="rule r-org">Typically the shortest of the three motive waves (W1, W3, W5)</div>
+        <div class="rule r-gold">Volume expands vs the prior corrective wave — first sign of new trend</div>
+        <div class="rule r-blue">RSI: crosses 50 from below, rising from oversold/neutral. Does NOT reach 70+</div>
+        <div class="rule r-cyan">Sentiment: still bearish — analysts call it a "dead cat bounce"</div>
+      </div>
+      <div>
+        <div class="cw" style="margin:0 0 14px;">
+          <h5>Wave 1 — Fibonacci Reference</h5>
+          <table class="tbl" style="font-size:11px;">
+            <tr><th>W1 vs Prior Correction</th><th>Probability</th><th>Implication for W3</th></tr>
+            <tr class="hl"><td class="tv">0.618× prior correction</td><td style="color:var(--grn);">HIGH ~50%</td><td>W3 = 1.618× W1 (standard)</td></tr>
+            <tr><td class="tv">1.000× prior correction</td><td style="color:var(--ylw);">MED ~25%</td><td>W3 = 1.618–2.618× W1</td></tr>
+            <tr class="hl"><td class="tv">1.618× prior correction</td><td style="color:var(--org);">LOW ~15%</td><td>W3 shorter — check for diagonal</td></tr>
+            <tr><td class="tv">0.382× prior correction</td><td style="color:var(--org);">LOW ~10%</td><td>Very weak start → W3 will be 2.618×+</td></tr>
+          </table>
+        </div>
+        <div class="card" style="background:var(--bg3);">
+          <h3 style="color:var(--grn);font-size:13px;">Equal Waves Rule (Frost &amp; Prechter)</h3>
+          <div class="rule r-grn">When Wave 3 is extended → W1 ≈ W5 (equality)</div>
+          <div class="rule r-cyan">When Wave 1 is extended → W3 ≈ W5 (equality)</div>
+          <div class="rule r-gold">W1 length is the reference for all subsequent Fibonacci calculations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAVE 2 -->
+  <div id="imp-w2" class="ic">
+    <div class="g2">
+      <div class="card">
+        <h3 style="color:var(--red);">Wave 2 — The Doubt</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:14px;">The corrective pullback after Wave 1. Tests conviction. The BEST entry zone for the Wave 3 trade.</p>
+        <div class="rule r-red">HARD RULE: Wave 2 NEVER retraces more than 100% of Wave 1</div>
+        <div class="rule r-gold">Structure: always a corrective pattern — Zigzag (most common), Flat, or Irregular</div>
+        <div class="rule r-grn">This is the optimal Wave 3 entry zone — highest risk/reward in EW</div>
+        <div class="rule r-blue">RSI: drops to 40–50. In bull markets, holds above 40. Does NOT break to bear territory.</div>
+        <div class="rule r-cyan">Sentiment: fear returns — many think the prior downtrend is resuming</div>
+        <div class="rule r-org">Volume contracts during W2 — conviction lacking in the pullback</div>
+      </div>
+      <div>
+        <div class="cw" style="margin:0 0 14px;">
+          <h5>Wave 2 Retrace of Wave 1 — Probability Table</h5>
+          <table class="tbl" style="font-size:11px;">
+            <tr><th>Retrace</th><th>Probability</th><th>Market Context</th></tr>
+            <tr><td class="tv">0.382</td><td style="color:var(--org);">LOW ~15%</td><td>Very strong bull — barely pauses</td></tr>
+            <tr class="hl"><td class="tv">0.500</td><td style="color:var(--ylw);">MED ~20%</td><td>Strong uptrend, early bull run</td></tr>
+            <tr><td class="tv" style="font-weight:600;">0.618 ★</td><td style="color:var(--grn);">HIGH ~45%</td><td>Any market — golden ratio retrace. PRIMARY TARGET.</td></tr>
+            <tr class="hl"><td class="tv">0.764</td><td style="color:var(--ylw);">MED ~12%</td><td>Commodities, FX, fundamental uncertainty</td></tr>
+            <tr><td class="tv">0.786</td><td style="color:var(--org);">LOW ~8%</td><td>Post-crash new bull — tests conviction hard</td></tr>
+            <tr class="hl"><td class="tv">&gt;0.900</td><td style="color:var(--red);">RARE ~3%</td><td>Running correction only — extremely strong trend</td></tr>
+          </table>
+        </div>
+        <div class="al al-red"><span>✗</span><span><strong>Hard Invalidation:</strong> Close BEYOND Wave 1 start = not Wave 2. Entire count must be reconsidered.</span></div>
+        <div class="al al-blue" style="margin-top:8px;"><span>💡</span><span>In <strong>downtrends</strong>, bear W2 bounces are shallower (38.2–50%). Bears don't allow deep corrections before resuming decline.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAVE 3 -->
+  <div id="imp-w3" class="ic">
+    <div class="g2">
+      <div class="card">
+        <h3 style="color:var(--cyan);">Wave 3 — The Power Move</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:14px;">The most important wave. Never the shortest. Where institutional money dominates. The most explosive, highest volume move.</p>
+        <div class="rule r-red">HARD RULE: Wave 3 is NEVER the shortest of waves 1, 3, and 5</div>
+        <div class="rule r-cyan">Most common extension: 1.618 × Wave 1. In commodities: often 2.618×</div>
+        <div class="rule r-grn">Highest volume of the entire impulse — institutional accumulation phase</div>
+        <div class="rule r-gold">RSI: reaches 70–85+ and STAYS overbought for extended periods</div>
+        <div class="rule r-blue">Gap-ups, accelerating moves, parabolic candles — all signs of W3</div>
+        <div class="rule r-org"><strong>③ of ③:</strong> Sub-wave 3 of Wave 3 is the most explosive move in all of EW — near-vertical price action</div>
+      </div>
+      <div>
+        <div class="cw" style="margin:0 0 14px;">
+          <h5>Wave 3 Extension by Market Type</h5>
+          <table class="tbl" style="font-size:11px;">
+            <tr><th>Market</th><th>Most Common W3</th><th>Probability</th></tr>
+            <tr class="hl"><td>Stock index</td><td class="tv">1.618× W1</td><td style="color:var(--grn);">HIGH ~50%</td></tr>
+            <tr><td>Commodity (Gold, Silver, Oil)</td><td class="tv">2.618× W1</td><td style="color:var(--grn);">HIGH ~45%</td></tr>
+            <tr class="hl"><td>Cryptocurrency</td><td class="tv">2.618–4.236× W1</td><td style="color:var(--grn);">HIGH ~55%</td></tr>
+            <tr><td>Forex (major pairs)</td><td class="tv">1.618× W1</td><td style="color:var(--grn);">HIGH ~50%</td></tr>
+            <tr class="hl"><td>Inside Wave C (violent)</td><td class="tv">1.618–2.618×</td><td style="color:var(--grn);">HIGH ~55%</td></tr>
+            <tr><td>Inside Diagonal</td><td class="tv">0.618–1.000× W1</td><td style="color:var(--grn);">HIGH ~65%</td></tr>
+          </table>
+        </div>
+        <div class="cw">
+          <h5>Sub-Wave Ratios Inside Wave 3</h5>
+          <table class="tbl" style="font-size:11px;">
+            <tr><th>Sub-Wave</th><th>Fibonacci</th><th>Note</th></tr>
+            <tr class="hl"><td style="color:var(--grn);">Sub-W1 of W3</td><td>20–35% of total W3</td><td>Less predictable — initial thrust</td></tr>
+            <tr><td style="color:var(--red);">Sub-W2 of W3</td><td class="tv">0.382–0.500 of sub-W1</td><td>Shallower than primary W2 — buy aggressively</td></tr>
+            <tr class="hl"><td style="color:var(--cyan);">③ of ③ (sub-W3)</td><td class="tv">1.618× sub-W1</td><td>Most explosive. MACD histogram peaks here.</td></tr>
+            <tr><td style="color:var(--org);">Sub-W4 of W3</td><td class="tv">0.236–0.382 of sub-W3</td><td>Very shallow — W3 won't allow deep sub-W4</td></tr>
+            <tr class="hl"><td style="color:var(--prp);">Sub-W5 of W3</td><td class="tv">= sub-W1 or 0.618×</td><td>Often truncated after huge sub-W3</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAVE 4 -->
+  <div id="imp-w4" class="ic">
+    <div class="g2">
+      <div class="card">
+        <h3 style="color:var(--org);">Wave 4 — The Consolidation</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:14px;">The pause before the final push. More complex and time-consuming than Wave 2. The "boredom" wave.</p>
+        <div class="rule r-red">HARD RULE: Wave 4 NEVER enters Wave 1 price territory (no overlap)</div>
+        <div class="rule r-gold">More complex than Wave 2 — often flat, triangle, or complex combo</div>
+        <div class="rule r-org">Sentiment: frustration, boredom, "the trend is over" feeling</div>
+        <div class="rule r-blue">RSI: normalizes from overbought to 40–60 range (cool-down phase)</div>
+        <div class="rule r-grn">Wave 4 low = strong support zone for entering Wave 5</div>
+        <div class="rule r-cyan">Triangles are extremely common as Wave 4 — coiling for Wave 5 thrust</div>
+      </div>
+      <div>
+        <div class="cw" style="margin:0 0 14px;">
+          <h5>Wave 4 Retrace of Wave 3 — Probability Table</h5>
+          <table class="tbl" style="font-size:11px;">
+            <tr><th>Retrace</th><th>Probability</th><th>Condition</th><th>Pattern Type</th></tr>
+            <tr><td class="tv">0.146</td><td style="color:var(--red);">RARE ~3%</td><td>After W3 = 4.236× W1</td><td>Tiny flat or running flat</td></tr>
+            <tr class="hl"><td class="tv">0.236</td><td style="color:var(--ylw);">MED ~20%</td><td>Very extended W3, strong trend</td><td>Small flat or triangle</td></tr>
+            <tr><td class="tv" style="font-weight:600;">0.382 ★</td><td style="color:var(--grn);">HIGH ~40%</td><td>Standard W4 — most common</td><td>Zigzag, flat, or triangle</td></tr>
+            <tr class="hl"><td class="tv">0.500</td><td style="color:var(--ylw);">MED ~20%</td><td>W2 was shallow (alternation)</td><td>Deep zigzag or expanded flat</td></tr>
+            <tr><td class="tv">0.618</td><td style="color:var(--org);">LOW ~12%</td><td>W2 very shallow; weak trend</td><td>Rare deep W4 zigzag</td></tr>
+            <tr class="hl"><td class="tv">&gt;0.618</td><td style="color:var(--red);">RARE</td><td>Likely count error — check overlap</td><td>May be larger correction</td></tr>
+          </table>
+        </div>
+        <div class="al al-gold"><span>★</span><span><strong>Alternation + Fibonacci cross-check:</strong> If W2 = 61.8% (deep zigzag) → W4 = flat/triangle at 23.6–38.2%. If W2 = 38.2% (shallow flat) → W4 = deep zigzag at 50–61.8%. Use this to eliminate impossible scenarios.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAVE 5 -->
+  <div id="imp-w5" class="ic">
+    <div class="al al-warn"><span>⚠</span><span><strong>Wave 5 is the most dangerous wave to trade long.</strong> Sentiment reaches maximum euphoria, media attention peaks — yet the end of the trend is near. Retail money piles in just before the reversal.</span></div>
+    <div class="g2" style="margin-top:16px;">
+      <div class="card">
+        <h3 style="color:var(--prp);">Wave 5 — The Final Push</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:14px;">Last motive wave. Weaker than W3 in breadth and volume. The RSI divergence is the key warning signal.</p>
+        <div class="rule r-prp">Less dynamic than Wave 3 — breadth narrows, fewer sectors participating</div>
+        <div class="rule r-warn">RSI DIVERGENCE: price makes new high, RSI makes LOWER high vs Wave 3 → W5 ending</div>
+        <div class="rule r-org">Volume often LOWER than Wave 3 — declining institutional participation</div>
+        <div class="rule r-red">Can TRUNCATE: fail to exceed the Wave 3 high — very bearish signal ahead</div>
+        <div class="rule r-grn">Sub-divides into 5 waves; frequently contains an ending diagonal near the top</div>
+        <div class="rule r-cyan">Sentiment: maximum euphoria — magazine covers, mainstream media, FOMO</div>
+      </div>
+      <div>
+        <div class="cw" style="margin:0 0 14px;">
+          <h5>Wave 5 Target Methods — Probability Ranked</h5>
+          <table class="tbl" style="font-size:11px;">
+            <tr><th>Method</th><th>Ratio</th><th>Probability</th><th>When W3 Was...</th></tr>
+            <tr class="hl"><td>W5 = W1 (from W4 low)</td><td class="tv">1.000× W1 ★</td><td style="color:var(--grn);">HIGH ~45%</td><td>Extended (1.618–2.618×)</td></tr>
+            <tr><td>W5 = 0.618× W1</td><td class="tv">0.618× W1</td><td style="color:var(--ylw);">MED ~20%</td><td>Extremely extended (4.236×)</td></tr>
+            <tr class="hl"><td>W5 = 0.618× (W1+W3)</td><td class="tv">0.618× combined</td><td style="color:var(--ylw);">MED ~15%</td><td>Extended W3 alternate method</td></tr>
+            <tr><td>W5 = 1.618× W1</td><td class="tv">1.618× W1</td><td style="color:var(--org);">LOW ~10%</td><td>Short W3 — W5 extending</td></tr>
+            <tr class="hl"><td>Channel upper line</td><td class="tv">Channel method</td><td style="color:var(--ylw);">MED ~15%</td><td>Any — draw W2/W4 line, parallel through W3</td></tr>
+          </table>
+        </div>
+        <div class="card" style="background:var(--bg3);">
+          <h3 style="color:var(--red);font-size:13px;">Truncation Warning Signs</h3>
+          <div class="rule r-red">W3 was extremely extended (3.618× or 4.236× W1) — momentum exhausted</div>
+          <div class="rule r-red">RSI makes a MUCH lower high in W5 vs W3 (barely reaches 55–60 vs 80+ in W3)</div>
+          <div class="rule r-red">MACD histogram barely positive during W5 while price approaches W3 high</div>
+          <div class="al al-red" style="margin-top:10px;"><span>✗</span><span>If W5 fails to exceed W3 high → truncation → crash follows rapidly, retracing entire 5-wave cycle in ~1/3 the build time.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXTENSIONS -->
+  <div id="imp-ext" class="ic">
+    <div class="al al-gold"><span>ℹ</span><span>In any impulse, ONE of the three motive waves (1, 3, or 5) will extend — becoming much longer than the other two. Identifying WHICH wave is extending is critical for Fibonacci targeting.</span></div>
+    <div class="g3" style="margin-top:16px;">
+      <div class="card">
+        <h3 style="color:var(--grn);">Wave 1 Extension</h3>
+        <div class="rule r-grn">Rare in stocks; more common in FX</div>
+        <div class="rule r-grn">W3 and W5 tend toward equality after extended W1</div>
+        <div class="rule r-cyan">W3 = 0.618× W1 (shorter than normal)</div>
+        <div class="rule r-gold">Deep W2 follows extended W1</div>
+        <hr>
+        <div style="font-size:10px;color:var(--dim);padding:8px;background:var(--bg);border-radius:4px;">Common in: Commodity first moves, FX trending moves</div>
+      </div>
+      <div class="card" style="border-color:var(--gdim);">
+        <h3 style="color:var(--gold);">Wave 3 Extension ⭐ Most Common</h3>
+        <div class="rule r-gold">Most common type — especially in stocks/commodities</div>
+        <div class="rule r-gold">W3 = 1.618× W1 minimum; often 2.618× in commodities</div>
+        <div class="rule r-cyan">W5 ≈ W1 in length after extended W3 (equality rule)</div>
+        <div class="rule r-grn">Easiest to trade — clearest sub-structure</div>
+        <hr>
+        <div style="font-size:10px;color:var(--cyan);padding:8px;background:var(--bg);border-radius:4px;">Gold &amp; Silver currently in W3 extension pattern — W5 targets based on W1 equality</div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--cyan);">Wave 5 Extension</h3>
+        <div class="rule r-cyan">Common in commodity markets (oil, gold blow-offs)</div>
+        <div class="rule r-cyan">W5 = 1.618× (W1+W2+W3+W4) is common target</div>
+        <div class="rule r-warn">Often ends with an ending diagonal — exhaustion pattern</div>
+        <div class="rule r-red">Violent reversal follows — W5 retraces completely in 1/3 time</div>
+        <hr>
+        <div style="font-size:10px;color:var(--dim);padding:8px;background:var(--bg);border-radius:4px;">Common in: Commodity blow-offs, crypto parabolas</div>
+      </div>
+    </div>
+    <div class="cw" style="margin-top:16px;">
+      <h5>Extended Wave → Subsequent Wave Expectations</h5>
+      <table class="tbl">
+        <tr><th>W3 Extension</th><th>W4 Retrace of W3</th><th>W5 Target</th><th>After W5 — Correction Depth</th></tr>
+        <tr class="hl"><td class="tv">1.618× W1</td><td>0.382 <span style="color:var(--grn);font-size:10px;">(HIGH)</span></td><td>W5 = W1 (equality)</td><td>W4 area of prior impulse</td></tr>
+        <tr><td class="tv">2.000× W1</td><td>0.236–0.382</td><td>W5 = W1 or 0.618×W1</td><td>38.2–61.8% of entire impulse</td></tr>
+        <tr class="hl"><td class="tv">2.618× W1</td><td>0.236 <span style="color:var(--grn);font-size:10px;">(HIGH)</span></td><td>W5 = W1 (equality)</td><td>Often corrects to W4 zone quickly</td></tr>
+        <tr><td class="tv">4.236× W1</td><td>0.146–0.236</td><td>W5 = 0.382–0.618× W1; truncation risk</td><td>W5 retraces fully in 1/3 build time</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SECTION: CORRECTIVE ═══════════════════════ -->
+<div id="sec-corrective" class="sec">
+  <div class="st">Corrective Waves</div>
+  <div class="ss">Simple Corrections · Zigzag · Flat · Running Flat</div>
+
+  <div class="itabs">
+    <button class="itab on" onclick="itab(this,'ic-zz')">Zigzag</button>
+    <button class="itab" onclick="itab(this,'ic-flat')">Regular Flat</button>
+    <button class="itab" onclick="itab(this,'ic-expflat')">Expanded Flat</button>
+    <button class="itab" onclick="itab(this,'ic-runflat')">Running Flat</button>
+    <button class="itab" onclick="itab(this,'ic-tri')">Triangle</button>
+  </div>
+
+  <!-- Zigzag -->
+  <div id="ic-zz" class="ic on">
+    <div class="g2">
+      <div class="card">
+        <h3>Zigzag (5-3-5)</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:14px;">The sharpest corrective pattern — moves decisively against the prior trend.</p>
+        <div class="rule r-gold">Structure: A(5 waves) — B(3 waves) — C(5 waves)</div>
+        <div class="rule r-grn">Wave B retraces 38.2%–61.8% of Wave A (never exceeds A start)</div>
+        <div class="rule r-cyan">Wave C = 0.618–1.618 × Wave A; most commonly 1.0×A</div>
+        <div class="rule r-red">B wave MUST NOT reach or exceed the start of Wave A</div>
+        <hr>
+        <div class="rule r-gold">Found in: Wave 2, Wave A of larger correction, Wave W of double zigzag</div>
+        <div class="rule r-grn">Double Zigzag (WXY): two zigzags connected by an X wave (3 waves)</div>
+      </div>
+      <div class="cw" style="margin:0;">
+        <h5>Zigzag Structure</h5>
+        <svg viewBox="0 0 400 200" width="100%">
+          <line x1="40" y1="160" x2="140" y2="50" stroke="var(--red)" stroke-width="2"/>
+          <line x1="140" y1="50" x2="200" y2="110" stroke="var(--blue)" stroke-width="2"/>
+          <line x1="200" y1="110" x2="340" y2="30" stroke="var(--red)" stroke-width="2"/>
+          <circle cx="40" cy="160" r="4" fill="var(--red)"/>
+          <circle cx="140" cy="50" r="4" fill="var(--red)"/>
+          <circle cx="200" cy="110" r="4" fill="var(--blue)"/>
+          <circle cx="340" cy="30" r="4" fill="var(--red)"/>
+          <text x="85" y="90" fill="var(--red)" font-size="14" font-weight="bold">A</text>
+          <text x="165" y="95" fill="var(--blue)" font-size="14" font-weight="bold">B</text>
+          <text x="275" y="60" fill="var(--red)" font-size="14" font-weight="bold">C</text>
+          <text x="30" y="180" fill="var(--dim)" font-size="10">Start</text>
+          <text x="325" y="20" fill="var(--dim)" font-size="10">End</text>
+          <line x1="40" y1="160" x2="360" y2="160" stroke="var(--bdr)" stroke-width="1" stroke-dasharray="4,4"/>
+          <text x="185" y="176" fill="var(--dim)" font-size="9">B &lt; Start of A</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Regular Flat -->
+  <div id="ic-flat" class="ic">
+    <div class="g2">
+      <div class="card">
+        <h3>Regular Flat (3-3-5)</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:14px;">Sideways correction where B ends near the start of A, and C ends near the end of A.</p>
+        <div class="rule r-gold">Structure: A(3 waves) — B(3 waves) — C(5 waves)</div>
+        <div class="rule r-grn">Wave B retraces 90%–100% of Wave A (near but not exceeding)</div>
+        <div class="rule r-cyan">Wave C = 1.0× Wave A; ends near the end of Wave A</div>
+        <div class="rule r-red">More sideways than zigzag — less depth, more time</div>
+        <hr>
+        <div class="rule r-gold">Found in: Wave 2, Wave 4, Wave B of larger ABC</div>
+        <div class="rule r-grn">Signal: trend will resume with similar strength on next motive wave</div>
+      </div>
+      <div class="cw" style="margin:0;">
+        <h5>Regular Flat Structure</h5>
+        <svg viewBox="0 0 400 200" width="100%">
+          <line x1="40" y1="100" x2="130" y2="155" stroke="var(--red)" stroke-width="2"/>
+          <line x1="130" y1="155" x2="220" y2="105" stroke="var(--blue)" stroke-width="2"/>
+          <line x1="220" y1="105" x2="360" y2="160" stroke="var(--red)" stroke-width="2"/>
+          <circle cx="40" cy="100" r="4" fill="var(--gold)"/>
+          <circle cx="130" cy="155" r="4" fill="var(--red)"/>
+          <circle cx="220" cy="105" r="4" fill="var(--blue)"/>
+          <circle cx="360" cy="160" r="4" fill="var(--red)"/>
+          <text x="75" y="142" fill="var(--red)" font-size="14" font-weight="bold">A</text>
+          <text x="170" y="118" fill="var(--blue)" font-size="14" font-weight="bold">B</text>
+          <text x="295" y="148" fill="var(--red)" font-size="14" font-weight="bold">C</text>
+          <line x1="40" y1="100" x2="360" y2="100" stroke="var(--bdr)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="130" y1="155" x2="360" y2="155" stroke="var(--bdr)" stroke-width="1" stroke-dasharray="4,4"/>
+          <text x="50" y="95" fill="var(--dim)" font-size="9">B ≈ Start A</text>
+          <text x="230" y="176" fill="var(--dim)" font-size="9">C ≈ End A</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Expanded Flat -->
+  <div id="ic-expflat" class="ic">
+    <div class="g2">
+      <div class="card">
+        <h3>Expanded Flat (3-3-5)</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:14px;">B exceeds the start of A; C exceeds the end of A. The most common "count breaker."</p>
+        <div class="rule r-gold">Structure: A(3 waves) — B(3 waves) — C(5 waves)</div>
+        <div class="rule r-warn">Wave B exceeds 100% of Wave A — makes a NEW extreme (trap!)</div>
+        <div class="rule r-cyan">Wave C = 1.236–1.618 × Wave A; makes a new extreme in opposite direction</div>
+        <div class="rule r-red">Traders are trapped by the false B breakout before C reversal</div>
+        <hr>
+        <div class="rule r-gold">B = 1.0–1.38 × A → expect expanded flat</div>
+        <div class="rule r-grn">C target: 1.618 × A from the B extreme</div>
+        <div class="rule r-blue">If B = 1.38+ × A → may be an irregular flat (see Irregular section)</div>
+      </div>
+      <div class="cw" style="margin:0;">
+        <h5>Expanded Flat Structure</h5>
+        <svg viewBox="0 0 400 210" width="100%">
+          <line x1="40" y1="110" x2="130" y2="160" stroke="var(--red)" stroke-width="2"/>
+          <line x1="130" y1="160" x2="230" y2="80" stroke="var(--blue)" stroke-width="2"/>
+          <line x1="230" y1="80" x2="370" y2="185" stroke="var(--red)" stroke-width="2"/>
+          <circle cx="40" cy="110" r="4" fill="var(--gold)"/>
+          <circle cx="130" cy="160" r="4" fill="var(--red)"/>
+          <circle cx="230" cy="80" r="4" fill="var(--blue)"/>
+          <circle cx="370" cy="185" r="4" fill="var(--red)"/>
+          <line x1="40" y1="110" x2="370" y2="110" stroke="var(--bdr)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="130" y1="160" x2="370" y2="160" stroke="var(--bdr)" stroke-width="1" stroke-dasharray="4,4"/>
+          <text x="75" y="150" fill="var(--red)" font-size="14" font-weight="bold">A</text>
+          <text x="175" y="110" fill="var(--blue)" font-size="14" font-weight="bold">B</text>
+          <text x="305" y="165" fill="var(--red)" font-size="14" font-weight="bold">C</text>
+          <text x="235" y="75" fill="var(--warn)" font-size="9">B &gt; Start A ⚠</text>
+          <text x="250" y="202" fill="var(--dim)" font-size="9">C &gt; End A</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Running Flat -->
+  <div id="ic-runflat" class="ic">
+    <div class="g2">
+      <div class="card">
+        <h3>Running Flat (3-3-5)</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:14px;">B exceeds A start; C FAILS to reach the end of A. Indicates overwhelming trend strength.</p>
+        <div class="rule r-gold">Structure: A(3 waves) — B(3 waves) — C(5 waves)</div>
+        <div class="rule r-warn">Wave B exceeds 100% of Wave A (like expanded flat)</div>
+        <div class="rule r-cyan">Wave C FAILS to reach the end of Wave A — trend is too strong</div>
+        <div class="rule r-grn">Most bullish/bearish corrective pattern — strong trend signal</div>
+        <hr>
+        <div class="rule r-red">C failing to reach A end confirms running flat vs expanded</div>
+        <div class="rule r-gold">Most common in Wave 4 — the trend wants to continue NOW</div>
+        <div class="rule r-blue">Explosive thrust follows — running flats precede the strongest Wave 3s</div>
+      </div>
+      <div class="cw" style="margin:0;">
+        <h5>Running Flat Structure</h5>
+        <svg viewBox="0 0 400 200" width="100%">
+          <line x1="40" y1="110" x2="120" y2="155" stroke="var(--red)" stroke-width="2"/>
+          <line x1="120" y1="155" x2="230" y2="75" stroke="var(--blue)" stroke-width="2"/>
+          <line x1="230" y1="75" x2="340" y2="125" stroke="var(--red)" stroke-width="2"/>
+          <circle cx="40" cy="110" r="4" fill="var(--gold)"/>
+          <circle cx="120" cy="155" r="4" fill="var(--red)"/>
+          <circle cx="230" cy="75" r="4" fill="var(--blue)"/>
+          <circle cx="340" cy="125" r="4" fill="var(--red)"/>
+          <line x1="40" y1="110" x2="360" y2="110" stroke="var(--gdim)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="120" y1="155" x2="360" y2="155" stroke="var(--bdr)" stroke-width="1" stroke-dasharray="4,4"/>
+          <text x="68" y="148" fill="var(--red)" font-size="14" font-weight="bold">A</text>
+          <text x="172" y="100" fill="var(--blue)" font-size="14" font-weight="bold">B</text>
+          <text x="285" y="118" fill="var(--red)" font-size="14" font-weight="bold">C</text>
+          <text x="345" y="130" fill="var(--grn)" font-size="9">C &lt; End A ✓</text>
+          <text x="235" y="70" fill="var(--warn)" font-size="9">B &gt; Start A</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Triangle -->
+  <div id="ic-tri" class="ic">
+    <div class="g2">
+      <div class="card">
+        <h3>Triangle (3-3-3-3-3)</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:14px;">5 sub-waves (A-B-C-D-E) each sub-dividing into 3. Precedes the final motive wave.</p>
+        <div class="rule r-gold">Structure: A(3) — B(3) — C(3) — D(3) — E(3)</div>
+        <div class="rule r-grn">Each wave = 0.618× the prior wave</div>
+        <div class="rule r-cyan">Contracting: converging trendlines (most common)</div>
+        <div class="rule r-blue">Expanding: diverging trendlines (rare, bearish)</div>
+        <div class="rule r-warn">Found in Wave 4, Wave B, or Wave X — never Wave 2</div>
+        <hr>
+        <div class="rule r-grn">Thrust after triangle: approximately equal to widest width of triangle</div>
+        <div class="rule r-org">Ascending: flat top, rising bottom (bullish)</div>
+        <div class="rule r-org">Descending: declining top, flat bottom (bearish)</div>
+      </div>
+      <div class="cw" style="margin:0;">
+        <h5>Contracting Triangle</h5>
+        <svg viewBox="0 0 400 200" width="100%">
+          <line x1="40" y1="50" x2="110" y2="155" stroke="var(--red)" stroke-width="2"/>
+          <line x1="110" y1="155" x2="190" y2="75" stroke="var(--blue)" stroke-width="2"/>
+          <line x1="190" y1="75" x2="260" y2="135" stroke="var(--org)" stroke-width="2"/>
+          <line x1="260" y1="135" x2="310" y2="90" stroke="var(--prp)" stroke-width="2"/>
+          <line x1="310" y1="90" x2="345" y2="115" stroke="var(--grn)" stroke-width="2"/>
+          <line x1="345" y1="115" x2="390" y2="40" stroke="var(--gold)" stroke-width="2.5" stroke-dasharray="6,3"/>
+          <circle cx="40" cy="50" r="3" fill="var(--red)"/>
+          <circle cx="110" cy="155" r="3" fill="var(--red)"/>
+          <circle cx="190" cy="75" r="3" fill="var(--blue)"/>
+          <circle cx="260" cy="135" r="3" fill="var(--org)"/>
+          <circle cx="310" cy="90" r="3" fill="var(--prp)"/>
+          <circle cx="345" cy="115" r="3" fill="var(--grn)"/>
+          <text x="65" y="115" fill="var(--red)" font-size="12" font-weight="bold">A</text>
+          <text x="148" y="100" fill="var(--blue)" font-size="12" font-weight="bold">B</text>
+          <text x="222" y="122" fill="var(--org)" font-size="12" font-weight="bold">C</text>
+          <text x="280" y="100" fill="var(--prp)" font-size="12" font-weight="bold">D</text>
+          <text x="326" y="110" fill="var(--grn)" font-size="12" font-weight="bold">E</text>
+          <text x="358" y="35" fill="var(--gold)" font-size="10">THRUST →</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SECTION: COMPLEX ═══════════════════════ -->
+<div id="sec-complex" class="sec">
+  <div class="st">Complex Corrections</div>
+  <div class="ss">Double Three · Triple Three · X Waves</div>
+
+  <div class="al al-gold"><span>ℹ</span><span>Complex corrections are sideways structures combining two or three simple corrections (zigzags, flats, triangles) connected by intervening X waves. They appear most often as Wave 4 or Wave B of a larger correction.</span></div>
+
+  <div class="g2" style="margin:20px 0;">
+    <div class="card">
+      <h3>Double Three (W-X-Y)</h3>
+      <div class="rule r-gold">Two simple corrective patterns connected by an X wave</div>
+      <div class="rule r-cyan">W = first correction (zigzag, flat, or triangle)</div>
+      <div class="rule r-blue">X = connecting wave (3-wave rally/decline, typically 38.2–61.8% of W)</div>
+      <div class="rule r-grn">Y = second correction (any simple pattern, usually different from W)</div>
+      <hr>
+      <div class="rule r-red">The X wave often looks like a new impulse — don't be fooled</div>
+      <div class="rule r-org">Combination guidelines: Zigzag-Flat, Flat-Triangle, Zigzag-Triangle (most common)</div>
+      <div class="rule r-gold">Time: usually takes 2–4× longer than a single correction</div>
+    </div>
+    <div class="card">
+      <h3>Triple Three (W-X-Y-X-Z)</h3>
+      <div class="rule r-gold">Three simple corrective patterns connected by two X waves</div>
+      <div class="rule r-cyan">W-X-Y-X-Z: extremely rare, very long-lasting sideways chop</div>
+      <div class="rule r-blue">Both X waves should be smaller and simpler than the corrections around them</div>
+      <div class="rule r-warn">Avoid trading inside triple threes — too unpredictable</div>
+      <hr>
+      <div class="rule r-red">Two adjacent zigzags = invalid (use double zigzag instead)</div>
+      <div class="rule r-org">Triangle can ONLY appear as the final structure (Y or Z) — never W</div>
+      <div class="rule r-grn">The exit from a triple three is often explosive — patience rewarded</div>
+    </div>
+  </div>
+
+  <div class="cw">
+    <h5>X Wave Fibonacci Guide</h5>
+    <table class="tbl">
+      <tr><th>X Wave Retrace of W</th><th>Implication</th><th>Likely Next (Y)</th></tr>
+      <tr class="hl"><td>23.6%–38.2%</td><td class="tv">Shallow X — weak correction</td><td>Strong Y wave follows</td></tr>
+      <tr><td>50%–61.8%</td><td class="tv">Normal X wave</td><td>Normal Y correction</td></tr>
+      <tr class="hl"><td>78.6%–90%</td><td class="tv">Deep X — complex correction ongoing</td><td>May extend to triple three</td></tr>
+      <tr><td>&gt;100% of W</td><td class="tv">NOT a valid X wave — recount</td><td>Revisit the entire structure</td></tr>
+    </table>
+  </div>
+
+  <div class="al al-warn" style="margin-top:16px;">
+    <span>⚠</span>
+    <span><strong>The "X Wave Trap":</strong> The X wave often retraces 38.2–61.8% of W and looks exactly like a new impulse beginning. This is the most common source of false breakout trades during complex corrections. Always wait for confirmation of the Y wave before entering trend-following positions.</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SECTION: DIAGONALS ═══════════════════════ -->
+<div id="sec-diagonals" class="sec">
+  <div class="st">Diagonal Waves</div>
+  <div class="ss">Leading Diagonal · Ending Diagonal</div>
+
+  <div class="g2" style="margin:20px 0;">
+    <div class="card">
+      <h3>Leading Diagonal</h3>
+      <div class="rule r-gold">Appears as Wave 1 of an impulse or Wave A of a zigzag</div>
+      <div class="rule r-cyan">Structure: 5-3-5-3-5 (or 3-3-3-3-3 in some cases)</div>
+      <div class="rule r-blue">Overlapping waves: Wave 4 enters Wave 1 territory</div>
+      <div class="rule r-grn">Converging or (rarely) diverging trendlines</div>
+      <div class="rule r-grn">Wave 3 is longer than Wave 1, and Wave 5 is shorter than Wave 3</div>
+      <hr>
+      <div class="rule r-org">Signal: a strong impulsive Wave 2 follows, retracing deep into the diagonal</div>
+      <div class="rule r-gold">Fibonacci: Wave 3 typically 0.618–1.0 × Wave 1</div>
+    </div>
+    <div class="card">
+      <h3>Ending Diagonal</h3>
+      <div class="rule r-gold">Appears only as Wave 5 of an impulse or Wave C of a zigzag/flat</div>
+      <div class="rule r-red">Structure: always 3-3-3-3-3 (never 5-wave sub-waves)</div>
+      <div class="rule r-blue">Overlapping waves: Wave 4 enters Wave 1 territory</div>
+      <div class="rule r-warn">Contracting trendlines (expanding = rising/falling wedge caution)</div>
+      <div class="rule r-red">Wave 5 must be shorter than Wave 3, which is shorter than Wave 1</div>
+      <hr>
+      <div class="rule r-grn">Signal: SHARP AND SWIFT reversal follows — typically returns to origin of diagonal</div>
+      <div class="rule r-cyan">RSI divergence almost always present in ending diagonals</div>
+      <div class="rule r-org">Common in exhaustion tops and bottoms — high probability reversal trade</div>
+    </div>
+  </div>
+
+  <div class="cw">
+    <h5>Diagonal Identification Checklist</h5>
+    <table class="tbl">
+      <tr><th>Feature</th><th>Leading Diagonal</th><th>Ending Diagonal</th></tr>
+      <tr class="hl"><td>Position</td><td class="tv">Wave 1 or Wave A</td><td class="tv">Wave 5 or Wave C</td></tr>
+      <tr><td>Sub-wave structure</td><td>5-3-5-3-5 (or 3s)</td><td class="tv">Always 3-3-3-3-3</td></tr>
+      <tr class="hl"><td>W4 overlaps W1?</td><td class="tv">Yes (required)</td><td class="tv">Yes (required)</td></tr>
+      <tr><td>Trendlines</td><td>Converging (usually)</td><td class="tv">Always converging</td></tr>
+      <tr class="hl"><td>Wave sizes</td><td>3 &gt; 1; 5 &lt; 3</td><td class="tv">1 &gt; 3 &gt; 5</td></tr>
+      <tr><td>Signal after</td><td>Strong Wave 2 retrace</td><td class="tv">Sharp full reversal</td></tr>
+      <tr class="hl"><td>RSI divergence</td><td>Not required</td><td class="tv">Almost always present</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SECTION: IRREGULAR WAVES (NEW) ═══════════════════════ -->
+<div id="sec-irregular" class="sec">
+  <div class="st irr">★ Irregular Waves</div>
+  <div class="ss">The Advanced Corrective Structures — Often Misread, Always Significant</div>
+
+  <div class="al al-irr">
+    <span>★</span>
+    <span><strong>What Are Irregular Waves?</strong> Irregular waves are corrective structures where the B wave travels BEYOND the start of Wave A, creating a false breakout that traps traders. They were originally classified by R.N. Elliott himself, though many practitioners only cover regular corrections. Mastering irregular patterns is essential for avoiding false signals and correctly identifying powerful continuation or reversal setups.</span>
+  </div>
+
+  <div class="itabs" style="margin-top:20px;">
+    <button class="itab on" onclick="itab(this,'ic-irrflat')">Irregular Flat</button>
+    <button class="itab" onclick="itab(this,'ic-irrfail')">Irregular Failure</button>
+    <button class="itab" onclick="itab(this,'ic-runcorr')">Running Correction</button>
+    <button class="itab" onclick="itab(this,'ic-irrmain')">Key Distinctions</button>
+  </div>
+
+  <!-- Irregular Flat -->
+  <div id="ic-irrflat" class="ic on">
+    <div class="g2">
+      <div class="card irr">
+        <h3>Irregular Flat (3-3-5)</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:14px;">The B wave significantly exceeds the start of Wave A, before a C wave decline that may or may not exceed the end of A.</p>
+        <div class="irrbox">
+          <h4>★ The Defining Feature</h4>
+          <p>Wave B travels beyond 100% (often 138%+) of Wave A, making a NEW extreme. This creates a "B wave trap" — traders buy/sell the breakout only to be caught by the reversal C wave.</p>
+        </div>
+        <div class="rule r-irr">Structure: A(3 waves) — B(3 waves, B &gt; 100% of A) — C(5 waves)</div>
+        <div class="rule r-red">Wave A sub-divides into 3 waves (NOT 5 — distinguishes from zigzag)</div>
+        <div class="rule r-warn">Wave B = 1.0–1.618 × Wave A (typically 1.236 or 1.382)</div>
+        <div class="rule r-cyan">Wave C = 1.0–1.618 × Wave A; ends near or beyond Wave A's end</div>
+        <hr>
+        <div class="rule r-grn"><strong>Fibonacci targets for C:</strong> 1.0, 1.236, 1.382, or 1.618 × A (measured from B extreme)</div>
+        <div class="rule r-gold">Found in: Wave 2, Wave 4, Wave B of a larger ABC structure</div>
+        <div class="rule r-blue">B wave looks like a resumption of trend — this is the trap!</div>
+      </div>
+      <div>
+        <div class="cw" style="margin:0 0 14px;">
+          <h5>Irregular Flat — Bullish Correction (In Uptrend)</h5>
+          <svg viewBox="0 0 400 220" width="100%">
+            <!-- Start baseline -->
+            <line x1="20" y1="140" x2="390" y2="140" stroke="var(--bdr)" stroke-width="1" stroke-dasharray="4,4"/>
+            <!-- A wave (decline) -->
+            <line x1="40" y1="80" x2="130" y2="155" stroke="var(--red)" stroke-width="2.5"/>
+            <!-- B wave (rally beyond A start) -->
+            <line x1="130" y1="155" x2="230" y2="55" stroke="var(--irr1)" stroke-width="2.5"/>
+            <!-- C wave (decline) -->
+            <line x1="230" y1="55" x2="360" y2="168" stroke="var(--red)" stroke-width="2.5"/>
+            <!-- Points -->
+            <circle cx="40" cy="80" r="5" fill="var(--gold)"/>
+            <circle cx="130" cy="155" r="5" fill="var(--red)"/>
+            <circle cx="230" cy="55" r="5" fill="var(--irr1)"/>
+            <circle cx="360" cy="168" r="5" fill="var(--red)"/>
+            <!-- Labels -->
+            <text x="30" y="73" fill="var(--gold)" font-size="11">Start</text>
+            <text x="80" y="128" fill="var(--red)" font-size="15" font-weight="bold">A</text>
+            <text x="175" y="90" fill="var(--irr1)" font-size="15" font-weight="bold">B</text>
+            <text x="298" y="125" fill="var(--red)" font-size="15" font-weight="bold">C</text>
+            <!-- Annotations -->
+            <text x="232" y="50" fill="var(--irr1)" font-size="9">B &gt; 100% of A ⚠ TRAP</text>
+            <text x="362" y="178" fill="var(--dim)" font-size="9">C end</text>
+            <!-- A start line -->
+            <line x1="40" y1="80" x2="370" y2="80" stroke="var(--gdim)" stroke-width="1" stroke-dasharray="3,3"/>
+            <text x="340" y="77" fill="var(--gdim)" font-size="9">A start</text>
+          </svg>
+        </div>
+        <div class="irrbox">
+          <h4>Trading the Irregular Flat</h4>
+          <ul class="chk">
+            <li>Do NOT chase the B wave breakout — wait for sub-structure completion</li>
+            <li>B wave in 3 sub-waves → confirms flat family (irregular, regular, or expanded)</li>
+            <li>Enter C wave direction after B peak confirmed with momentum reversal</li>
+            <li>Target: C = 1.0–1.618 × A, measured from B extreme</li>
+            <li>Stop: beyond 1.618 × A from B extreme (would negate pattern)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Irregular Failure -->
+  <div id="ic-irrfail" class="ic">
+    <div class="g2">
+      <div class="card irr">
+        <h3>Irregular Failure (Failed C / Truncated C)</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:14px;">The C wave fails to reach — or barely reaches — the end of Wave A, signaling extreme momentum in the primary trend direction.</p>
+        <div class="irrbox">
+          <h4>★ The Defining Feature</h4>
+          <p>Wave C fails to extend to the normal target of Wave A's end. This failure reveals that the underlying trend is so powerful that normal corrective forces cannot achieve their typical depth. Expect an explosive resumption of the primary trend.</p>
+        </div>
+        <div class="rule r-irr">Structure: A(3 or 5) — B(3 waves) — C(5 waves, FAILS to reach A end)</div>
+        <div class="rule r-warn">C is typically shorter than A — less than 61.8% of A in depth</div>
+        <div class="rule r-cyan">B often travels 100%+ of A (making it also look like expanded flat briefly)</div>
+        <div class="rule r-grn">Signal: PRIMARY TREND WILL RESUME WITH EXCEPTIONAL FORCE</div>
+        <hr>
+        <div class="rule r-gold">Also known as: "Truncated C", "C Failure", "Weak C"</div>
+        <div class="rule r-red">Risk: if C continues past A end → not an irregular failure → recount</div>
+        <div class="rule r-blue">Best context: appears in Wave 4 of a powerful Wave 3 extension</div>
+      </div>
+      <div>
+        <div class="cw" style="margin:0 0 14px;">
+          <h5>Irregular Failure — In Uptrend (Bullish)</h5>
+          <svg viewBox="0 0 400 210" width="100%">
+            <!-- A end reference -->
+            <line x1="20" y1="160" x2="390" y2="160" stroke="var(--bdr)" stroke-width="1" stroke-dasharray="4,4"/>
+            <text x="332" y="157" fill="var(--dim)" font-size="9">Normal C target</text>
+            <!-- A wave -->
+            <line x1="40" y1="70" x2="130" y2="160" stroke="var(--red)" stroke-width="2.5"/>
+            <!-- B wave (past A start) -->
+            <line x1="130" y1="160" x2="220" y2="52" stroke="var(--irr2)" stroke-width="2.5"/>
+            <!-- C wave (fails) -->
+            <line x1="220" y1="52" x2="330" y2="128" stroke="var(--red)" stroke-width="2.5"/>
+            <!-- Continuation -->
+            <line x1="330" y1="128" x2="390" y2="30" stroke="var(--grn)" stroke-width="2" stroke-dasharray="6,3"/>
+            <!-- Points -->
+            <circle cx="40" cy="70" r="5" fill="var(--gold)"/>
+            <circle cx="130" cy="160" r="5" fill="var(--red)"/>
+            <circle cx="220" cy="52" r="5" fill="var(--irr2)"/>
+            <circle cx="330" cy="128" r="5" fill="var(--red)"/>
+            <!-- Labels -->
+            <text x="28" y="65" fill="var(--gold)" font-size="10">Start</text>
+            <text x="72" y="128" fill="var(--red)" font-size="15" font-weight="bold">A</text>
+            <text x="165" y="90" fill="var(--irr2)" font-size="15" font-weight="bold">B</text>
+            <text x="275" y="105" fill="var(--red)" font-size="15" font-weight="bold">C</text>
+            <text x="335" y="125" fill="var(--grn)" font-size="9">C fails! ↑ Explosion</text>
+            <text x="225" y="48" fill="var(--irr2)" font-size="9">B &gt; A start</text>
+            <!-- C fail arrow -->
+            <line x1="330" y1="128" x2="330" y2="160" stroke="var(--irr1)" stroke-width="1" stroke-dasharray="3,2"/>
+            <text x="333" y="148" fill="var(--irr1)" font-size="9">Gap to target</text>
+          </svg>
+        </div>
+        <div class="irrbox">
+          <h4>Why Irregular Failure is High Value</h4>
+          <ul class="chk">
+            <li>The failure of C to reach normal target confirms extreme trend strength</li>
+            <li>Entry: at the completion of the failed C wave (after 5-wave C structure visible)</li>
+            <li>Stop: below the A end level (if price reaches normal target, pattern invalidated)</li>
+            <li>Target: Wave 5 extension, often 1.618–2.618 × Wave 1 from Wave 4 end</li>
+            <li>RSI: will NOT reach oversold/overbought during the failure — another confirmation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Running Correction -->
+  <div id="ic-runcorr" class="ic">
+    <div class="g2">
+      <div class="card irr">
+        <h3>Running Correction</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:14px;">The entire A-B-C corrective structure remains above (in uptrend) or below (in downtrend) the start of Wave A. The market barely corrects before resuming.</p>
+        <div class="irrbox">
+          <h4>★ The Defining Feature</h4>
+          <p>In a running correction, Wave B goes significantly beyond Wave A's start, and Wave C does NOT reach the end of Wave A — leaving the entire correction "above" the prior Wave A origin. This is the most bullish (or bearish) corrective structure possible.</p>
+        </div>
+        <div class="rule r-irr">B travels 100%+ beyond A start (like irregular flat)</div>
+        <div class="rule r-irr">C remains above Wave A's start point (the entire structure runs higher)</div>
+        <div class="rule r-grn">Extremely bullish: market refuses to correct even to the prior extreme</div>
+        <div class="rule r-cyan">Structure can be: Running Zigzag (5-3-5) or Running Flat (3-3-5)</div>
+        <hr>
+        <div class="rule r-gold">Context: Wave 2 or Wave 4 in an exceptionally powerful impulse</div>
+        <div class="rule r-red">Often mistaken for a new impulse — careful, it's still corrective!</div>
+        <div class="rule r-blue">Confirm with sub-wave structure: A and C must be 3-wave or 5-wave per type</div>
+        <div class="rule r-warn">If C goes BELOW start of A → it's no longer a running correction → recount</div>
+      </div>
+      <div>
+        <div class="cw" style="margin:0 0 14px;">
+          <h5>Running Correction — In Uptrend</h5>
+          <svg viewBox="0 0 420 210" width="100%">
+            <!-- A start reference -->
+            <line x1="20" y1="150" x2="410" y2="150" stroke="var(--gdim)" stroke-width="1" stroke-dasharray="4,4"/>
+            <text x="330" y="147" fill="var(--gdim)" font-size="9">A start level</text>
+            <!-- Prior uptrend -->
+            <line x1="20" y1="190" x2="50" y2="150" stroke="var(--grn)" stroke-width="2"/>
+            <!-- A wave (small decline) -->
+            <line x1="50" y1="150" x2="120" y2="175" stroke="var(--red)" stroke-width="2.5"/>
+            <!-- B wave (large rally, past A start) -->
+            <line x1="120" y1="175" x2="230" y2="105" stroke="var(--irr1)" stroke-width="2.5"/>
+            <!-- C wave (decline, but stays above A start) -->
+            <line x1="230" y1="105" x2="320" y2="138" stroke="var(--red)" stroke-width="2.5"/>
+            <!-- Continuation up -->
+            <line x1="320" y1="138" x2="410" y2="50" stroke="var(--grn)" stroke-width="2.5" stroke-dasharray="6,3"/>
+            <!-- Points -->
+            <circle cx="50" cy="150" r="5" fill="var(--gold)"/>
+            <circle cx="120" cy="175" r="5" fill="var(--red)"/>
+            <circle cx="230" cy="105" r="5" fill="var(--irr1)"/>
+            <circle cx="320" cy="138" r="5" fill="var(--red)"/>
+            <!-- Labels -->
+            <text x="38" y="145" fill="var(--gold)" font-size="10">A start</text>
+            <text x="72" y="175" fill="var(--red)" font-size="14" font-weight="bold">A</text>
+            <text x="172" y="128" fill="var(--irr1)" font-size="14" font-weight="bold">B</text>
+            <text x="268" y="130" fill="var(--red)" font-size="14" font-weight="bold">C</text>
+            <text x="325" y="128" fill="var(--grn)" font-size="9">C &gt; A start ✓</text>
+            <text x="235" y="100" fill="var(--irr1)" font-size="9">B far past A start ⚠</text>
+            <text x="365" y="45" fill="var(--grn)" font-size="9">→ Explosion!</text>
+            <!-- Shade zone showing "entire correction above A start" -->
+            <rect x="50" y="100" width="280" height="50" fill="rgba(61,220,132,0.04)" rx="2"/>
+            <text x="100" y="122" fill="var(--grn)" font-size="9">Entire correction above A start level</text>
+          </svg>
+        </div>
+        <div class="irrbox">
+          <h4>Running Correction vs Regular Flat</h4>
+          <table class="tbl" style="font-size:11px;">
+            <tr><th>Feature</th><th>Regular Flat</th><th>Running Correction</th></tr>
+            <tr><td>B reaches</td><td>~100% of A start</td><td class="tv" style="color:var(--irr1);">&gt;100% — far past A start</td></tr>
+            <tr><td>C reaches</td><td>~100% of A end</td><td class="tv" style="color:var(--irr1);">Fails to reach A start</td></tr>
+            <tr><td>Entire structure</td><td>Overlaps A territory</td><td class="tv" style="color:var(--irr1);">Above A start level</td></tr>
+            <tr><td>Trend signal</td><td>Normal continuation</td><td class="tv" style="color:var(--grn);">Explosive continuation</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Distinctions -->
+  <div id="ic-irrmain" class="ic">
+    <div class="st irr" style="font-size:22px;margin-bottom:6px;">Irregular Waves — Master Comparison</div>
+
+    <div class="cw">
+      <h5>All Irregular Flat Variants — Side-by-Side</h5>
+      <table class="tbl">
+        <tr><th>Pattern</th><th>A structure</th><th>B vs A start</th><th>C vs A end</th><th>Signal Strength</th></tr>
+        <tr class="hl"><td class="tl">Regular Flat</td><td>3 waves</td><td>~100% (near)</td><td>~100% (meets)</td><td>Normal continuation</td></tr>
+        <tr><td class="tl">Expanded Flat</td><td>3 waves</td><td>100%–138%</td><td>Exceeds A end</td><td>Strong correction ahead</td></tr>
+        <tr class="hl"><td style="color:var(--irr1);">★ Irregular Flat</td><td>3 waves</td><td>138%+ (significant)</td><td>Near or exceeds</td><td>B trap, C surprise</td></tr>
+        <tr><td style="color:var(--irr2);">★ Irregular Failure</td><td>3 or 5 waves</td><td>100%+</td><td>FAILS to reach A end</td><td>Explosive resumption</td></tr>
+        <tr class="hl"><td style="color:var(--irr3);">★ Running Correction</td><td>3 waves</td><td>100%+ (far)</td><td>Fails &amp; stays above A start</td><td>Most extreme bullish</td></tr>
+        <tr><td class="tl">Running Flat</td><td>3 waves</td><td>100%–130%</td><td>Fails to reach A end</td><td>Very strong trend</td></tr>
+      </table>
+    </div>
+
+    <div class="g2" style="margin-top:20px;">
+      <div>
+        <div class="irrbox">
+          <h4>How to Identify an Irregular Wave in Real-Time</h4>
+          <ul class="chk">
+            <li><strong>Step 1:</strong> Identify a 3-wave (A wave) move against the primary trend</li>
+            <li><strong>Step 2:</strong> Watch the B wave — if it exceeds the start of A by &gt;100%, suspect irregular</li>
+            <li><strong>Step 3:</strong> Count B sub-waves — must be 3 waves (zigzag or flat), NOT 5</li>
+            <li><strong>Step 4:</strong> Measure B = 1.0–1.618 × A for irregular flat; &gt;1.382 favors irregular</li>
+            <li><strong>Step 5:</strong> Wait for B peak confirmed (momentum reversal, RSI divergence)</li>
+            <li><strong>Step 6:</strong> Enter C wave trade after B confirmed. Count C sub-waves (must be 5)</li>
+            <li><strong>Step 7:</strong> If C fails to reach A end → irregular failure → primary trend resuming now</li>
+          </ul>
+        </div>
+        <div class="solbox" style="margin-top:14px;">
+          <h4>Critical Difference: B Wave in 3 vs 5</h4>
+          <p>The single most important confirmation of any flat-family pattern (including all irregulars) is that the B wave sub-divides into exactly 3 waves — NOT 5. A 5-wave B would indicate the start of a new impulse, not a corrective B wave. Always count B sub-waves before trading.</p>
+        </div>
+      </div>
+      <div>
+        <div class="card irr">
+          <h3>Irregular Wave Psychology</h3>
+          <div class="rule r-irr">B wave breakout traps aggressive trend-followers who chase the "breakout"</div>
+          <div class="rule r-red">C wave then reverses sharply, stopping out the B wave chasers</div>
+          <div class="rule r-grn">The real trade is FADING the B wave breakout after it completes</div>
+          <div class="rule r-irr" style="margin-top:8px;">In irregular failure: even the C wave can't reach normal targets → shorts trapped in downtrend</div>
+          <div class="rule r-cyan">Running correction: BOTH B and C are traps in the direction of correction — only trend traders win</div>
+          <hr>
+          <p style="font-size:11px;color:var(--dim);line-height:1.7;">The key to irregular waves is understanding they represent markets where the underlying trend is so dominant that corrective forces cannot achieve normal depth or extent. This is always a signal that the primary trend will resume with above-average force once the irregular structure completes.</p>
+        </div>
+
+        <div class="cw" style="margin-top:14px;">
+          <h5>Fibonacci Levels for Irregular C Wave Targets</h5>
+          <table class="tbl" style="font-size:11px;">
+            <tr><th>C relative to A</th><th>Pattern Type</th><th>Action</th></tr>
+            <tr><td class="tv">0.618× A</td><td>Irregular failure / Running</td><td>Strong reversal buy/sell</td></tr>
+            <tr class="hl"><td class="tv">1.0× A</td><td>Regular or irregular flat</td><td>First C target</td></tr>
+            <tr><td class="tv">1.236× A</td><td>Irregular flat extended</td><td>Common C end zone</td></tr>
+            <tr class="hl"><td class="tv">1.382× A</td><td>Expanded / irregular</td><td>Second C target</td></tr>
+            <tr><td class="tv">1.618× A</td><td>Irregular / expanded flat</td><td>Maximum C target</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="al al-irr" style="margin-top:24px;">
+      <span>★</span>
+      <span><strong>Master Insight — Irregular Waves & Market Context:</strong> Irregular waves occur most frequently during periods of extreme market conviction — strong bull markets, post-crisis rallies, and parabolic blow-offs. When you see a B wave traveling far beyond the A wave start, the market is telling you the underlying force is unusually strong. Study the degree context: an irregular Wave 2 in a grand supercycle bull market means the entire correction is minor in the context of decades of bull trend.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SECTION: FIBONACCI ATLAS ═══════════════════════ -->
+<div id="sec-fibonacci" class="sec">
+  <div class="st">Fibonacci Probability Atlas</div>
+  <div class="ss">80+ Ratio Scenarios · Probability-Ranked · All Wave Types · Log vs Arithmetic Scale</div>
+
+  <div class="al al-gold"><span>φ</span><span>Fibonacci ratios are not equally likely. Markets strongly prefer certain ratios depending on which wave you're in, which pattern it belongs to, trend direction, and degree. This atlas gives probability-ranked targets for every wave in every context — the definitive reference for placing Fibonacci levels on any chart.</span></div>
+
+  <div class="itabs" style="margin-top:16px;">
+    <button class="itab on" onclick="itab(this,'fib-legend')">Legend &amp; Ratios</button>
+    <button class="itab" onclick="itab(this,'fib-w1w2')">W1 &amp; W2</button>
+    <button class="itab" onclick="itab(this,'fib-w3')">Wave 3</button>
+    <button class="itab" onclick="itab(this,'fib-w4w5')">W4 &amp; W5</button>
+    <button class="itab" onclick="itab(this,'fib-abc')">A-B-C Waves</button>
+    <button class="itab" onclick="itab(this,'fib-wxy')">W-X-Y &amp; Triangles</button>
+    <button class="itab" onclick="itab(this,'fib-log')">Log vs Arithmetic</button>
+    <button class="itab" onclick="itab(this,'fib-master')">Master Reference</button>
+  </div>
+
+  <!-- LEGEND -->
+  <div id="fib-legend" class="ic on">
+    <div class="g2">
+      <div>
+        <div class="cw">
+          <h5>Probability Scale</h5>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">
+            <div style="display:flex;align-items:center;gap:12px;"><span style="background:rgba(61,220,132,.15);color:var(--grn);border:1px solid rgba(61,220,132,.3);padding:3px 10px;border-radius:10px;font-size:9px;font-weight:600;">HIGH 55–75%</span><span style="font-size:11px;color:var(--txt);">Primary target. This ratio ends the wave more than half the time.</span></div>
+            <div style="display:flex;align-items:center;gap:12px;"><span style="background:rgba(240,208,64,.15);color:var(--ylw);border:1px solid rgba(240,208,64,.3);padding:3px 10px;border-radius:10px;font-size:9px;font-weight:600;">MED 30–55%</span><span style="font-size:11px;color:var(--txt);">Significant secondary target. Always mark on chart.</span></div>
+            <div style="display:flex;align-items:center;gap:12px;"><span style="background:rgba(248,128,48,.15);color:var(--org);border:1px solid rgba(248,128,48,.3);padding:3px 10px;border-radius:10px;font-size:9px;font-weight:600;">LOW 15–30%</span><span style="font-size:11px;color:var(--txt);">Possible but not primary expectation. Watch if primary fails.</span></div>
+            <div style="display:flex;align-items:center;gap:12px;"><span style="background:rgba(240,64,96,.12);color:var(--red);border:1px solid rgba(240,64,96,.25);padding:3px 10px;border-radius:10px;font-size:9px;font-weight:600;">RARE &lt;15%</span><span style="font-size:11px;color:var(--txt);">Extreme conditions — commodity blow-offs, panic crashes.</span></div>
+          </div>
+        </div>
+        <div class="cw" style="margin-top:14px;">
+          <h5>The 4 Context Layers That Change Ratios</h5>
+          <ul class="chk">
+            <li><strong style="color:var(--gold2);">Layer 1 — Trend Direction:</strong> Uptrend = shallower retracements (38.2%). Downtrend = deeper (61.8–78.6%).</li>
+            <li><strong style="color:var(--gold2);">Layer 2 — Position in Structure:</strong> Inside 1-2-3-4-5? Inside ABC? Inside WXY? Host structure changes ratios dramatically.</li>
+            <li><strong style="color:var(--gold2);">Layer 3 — Pattern Type:</strong> B in a flat vs B in a zigzag are completely different ratios.</li>
+            <li><strong style="color:var(--gold2);">Layer 4 — Wave Degree:</strong> Higher degree = cleaner textbook ratios. Short timeframes = more noise.</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="g2">
+          <div class="cw">
+            <h5>Retracement Ratios</h5>
+            <table class="tbl" style="font-size:11px;">
+              <tr><th>Ratio</th><th>Primary Use</th></tr>
+              <tr><td class="tv">0.236</td><td>Shallow W4, strong trend</td></tr>
+              <tr><td class="tv">0.382</td><td>W4 standard; B in zigzag</td></tr>
+              <tr><td class="tv">0.500</td><td>W2/W4 common</td></tr>
+              <tr class="hl"><td class="tv">0.618 ★</td><td>W2 primary — golden ratio</td></tr>
+              <tr><td class="tv">0.764</td><td>Deep W2; B expanded flat</td></tr>
+              <tr><td class="tv">0.786</td><td>Deepest valid W2</td></tr>
+              <tr><td class="tv">0.854</td><td>Extreme B in running flat</td></tr>
+              <tr><td class="tv">0.900+</td><td>Running correction B wave</td></tr>
+            </table>
+          </div>
+          <div class="cw">
+            <h5>Extension Ratios</h5>
+            <table class="tbl" style="font-size:11px;">
+              <tr><th>Ratio</th><th>Primary Use</th></tr>
+              <tr><td class="tv">1.000</td><td>W5=W1; C=A; Y=W</td></tr>
+              <tr><td class="tv">1.236</td><td>Expanded flat C; short W3</td></tr>
+              <tr><td class="tv">1.272</td><td>W5 when W3 extended</td></tr>
+              <tr class="hl"><td class="tv">1.618 ★</td><td>W3 standard / C of zigzag</td></tr>
+              <tr><td class="tv">2.000</td><td>Strong W3</td></tr>
+              <tr><td class="tv">2.618</td><td>Extended W3, commodity</td></tr>
+              <tr><td class="tv">3.618</td><td>Rare commodity extension</td></tr>
+              <tr><td class="tv">4.236</td><td>Mega W3 — secular bull</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="al al-gold" style="margin-top:14px;"><span>★</span><span><strong>Confluence Protocol:</strong> Mark primary Fibonacci target, then secondary. See if any OTHER independent Fibonacci (from a different wave reference) clusters within 0.5–1% of either. That cluster = High Probability Reversal Zone (HPRZ). Three Fibonacci measurements + RSI divergence + candle = highest conviction EW trade.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- W1 & W2 -->
+  <div id="fib-w1w2" class="ic">
+    <div class="al al-gold"><span>★</span><span>Wave 1 is the reference — its length defines ALL subsequent Fibonacci relationships. Wave 2 is the best entry point in all of EW — highest risk/reward for the Wave 3 trade.</span></div>
+    <div class="g2" style="margin-top:14px;">
+      <div>
+        <h4 style="color:var(--grn);margin-bottom:10px;">Wave 1 — Reference Wave</h4>
+        <table class="tbl" style="font-size:11px;">
+          <tr><th>W1 vs Prior Correction</th><th>Prob</th><th>Predicts W3/W5</th></tr>
+          <tr class="hl"><td class="tv">0.618× prior correction</td><td style="color:var(--grn);">HIGH ~50%</td><td>W3 = 1.618× W1; W5 = W1</td></tr>
+          <tr><td class="tv">1.000× prior correction</td><td style="color:var(--ylw);">MED ~25%</td><td>W3 = 1.618–2.618× W1</td></tr>
+          <tr class="hl"><td class="tv">1.618× prior correction</td><td style="color:var(--org);">LOW ~15%</td><td>Extended W1 → W3 &amp; W5 shorter; check for diagonal</td></tr>
+          <tr><td class="tv">0.382× prior correction</td><td style="color:var(--org);">LOW ~10%</td><td>Very weak start → W3 will be 2.618×+</td></tr>
+        </table>
+        <div class="rule r-gold" style="margin-top:10px;"><strong>Equal Waves:</strong> When W3 is extended → W5 ≈ W1. When W1 is extended → W3 ≈ W5. One of the most reliable guidelines in EW.</div>
+      </div>
+      <div>
+        <h4 style="color:var(--red);margin-bottom:10px;">Wave 2 — Retrace of Wave 1</h4>
+        <table class="tbl" style="font-size:11px;">
+          <tr><th>Retrace</th><th>Prob</th><th>Context</th><th>W3 After</th></tr>
+          <tr><td class="tv">0.236</td><td style="color:var(--red);">RARE ~3%</td><td>Running correction</td><td>W3 = 4.236× W1</td></tr>
+          <tr class="hl"><td class="tv">0.382</td><td style="color:var(--org);">LOW ~15%</td><td>Very strong bull</td><td>W3 = 2.618× W1</td></tr>
+          <tr><td class="tv">0.500</td><td style="color:var(--ylw);">MED ~20%</td><td>Strong trending market</td><td>W3 = 1.618–2.618×</td></tr>
+          <tr class="hl"><td class="tv" style="font-weight:700;">0.618 ★</td><td style="color:var(--grn);">HIGH ~45%</td><td>Any market — golden ratio</td><td>W3 = 1.618–2.618× (standard)</td></tr>
+          <tr><td class="tv">0.764</td><td style="color:var(--ylw);">MED ~12%</td><td>Commodities, FX</td><td>W3 = 1.618× W1 typically</td></tr>
+          <tr class="hl"><td class="tv">0.786</td><td style="color:var(--org);">LOW ~8%</td><td>Post-crash new bull</td><td>W3 = 1.618× minimum</td></tr>
+          <tr><td class="tv">&gt;0.900</td><td style="color:var(--red);">RARE ~3%</td><td>Running corrections only</td><td>W3 extremely powerful — 4.236×+</td></tr>
+        </table>
+        <div class="al al-red" style="margin-top:10px;"><span>✗</span><span><strong>Hard Invalidation:</strong> Close beyond Wave 1 start → not Wave 2. Entire count wrong.</span></div>
+      </div>
+    </div>
+    <div class="cw" style="margin-top:14px;">
+      <h5>W2 Context — Internal Structure Affects Ratio</h5>
+      <table class="tbl" style="font-size:11px;">
+        <tr><th>W2 Context</th><th>Typical Retrace</th><th>Prob</th><th>Behavior Note</th></tr>
+        <tr class="hl"><td>W2 inside Wave A (zigzag A)</td><td class="tv">0.382–0.500</td><td style="color:var(--grn);">HIGH</td><td>Shallow — A waves move quickly. W2 inside A rarely reaches 0.618.</td></tr>
+        <tr><td>W2 inside Wave C (down)</td><td class="tv">0.618–0.764</td><td style="color:var(--grn);">HIGH</td><td>Deeper — C wave bears are aggressive. Bounces within C are traps.</td></tr>
+        <tr class="hl"><td>W2 inside W3 of impulse</td><td class="tv">0.382–0.500</td><td style="color:var(--grn);">HIGH</td><td>Shallowest W2 — W3 of 3 sub-waves are sharp. Buy the dip aggressively.</td></tr>
+        <tr><td>W2 in leading diagonal</td><td class="tv">0.618–0.786</td><td style="color:var(--grn);">HIGH ~60%</td><td>Must overlap W1 to confirm diagonal structure</td></tr>
+        <tr class="hl"><td>W2 of primary degree (months)</td><td class="tv">0.618</td><td style="color:var(--grn);">HIGH</td><td>Higher degree = cleaner textbook ratios. 61.8% highly reliable.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- WAVE 3 -->
+  <div id="fib-w3" class="ic">
+    <div class="al al-cyan"><span>★</span><span>Wave 3 extensions are measured from the Wave 2 LOW, projecting multiples of Wave 1's length. The most important Fibonacci relationship in all of Elliott Wave theory.</span></div>
+    <div class="g2" style="margin-top:14px;">
+      <div>
+        <h4 style="color:var(--cyan);margin-bottom:10px;">Standard W3 Extension of W1</h4>
+        <table class="tbl" style="font-size:11px;">
+          <tr><th>Extension</th><th>Prob</th><th>Market Type</th><th>W4/W5 After</th></tr>
+          <tr><td class="tv">1.000× W1</td><td style="color:var(--red);">RARE ~8%</td><td>Weak trend, late cycle</td><td>Risk of violating "not shortest" rule</td></tr>
+          <tr class="hl"><td class="tv">1.272× W1</td><td style="color:var(--org);">LOW ~10%</td><td>Moderate trend</td><td>Shorter W3 — check if W1 was extended</td></tr>
+          <tr><td class="tv" style="font-weight:700;">1.618× W1 ★</td><td style="color:var(--grn);">HIGH ~40%</td><td>Any market — standard</td><td>W4 = 38.2% of W3; W5 = W1</td></tr>
+          <tr class="hl"><td class="tv">2.000× W1</td><td style="color:var(--ylw);">MED ~15%</td><td>Strong trending market</td><td>W4 = 23.6–38.2%; W5 = W1 or 0.618×</td></tr>
+          <tr><td class="tv">2.618× W1</td><td style="color:var(--ylw);">MED ~15%</td><td>Commodity bulls, strong indices</td><td>W4 = 23.6%; W5 = W1 (equality)</td></tr>
+          <tr class="hl"><td class="tv">3.618× W1</td><td style="color:var(--org);">LOW ~7%</td><td>Secular commodity bull, crypto</td><td>Very shallow W4; W5 much shorter</td></tr>
+          <tr><td class="tv">4.236× W1</td><td style="color:var(--red);">RARE ~5%</td><td>Generational bull moves (Gold, Silver)</td><td>W4 tiny; W5 = 0.382–0.618× W1. Truncation risk.</td></tr>
+        </table>
+      </div>
+      <div>
+        <h4 style="color:var(--cyan);margin-bottom:10px;">W3 by Market Type</h4>
+        <table class="tbl" style="font-size:11px;">
+          <tr><th>Market</th><th>Most Common W3</th><th>Prob</th></tr>
+          <tr class="hl"><td>Stock index</td><td class="tv">1.618× W1</td><td style="color:var(--grn);">HIGH ~50%</td></tr>
+          <tr><td>Commodity (Gold, Silver)</td><td class="tv">2.618× W1</td><td style="color:var(--grn);">HIGH ~45%</td></tr>
+          <tr class="hl"><td>Cryptocurrency</td><td class="tv">2.618–4.236× W1</td><td style="color:var(--grn);">HIGH ~55%</td></tr>
+          <tr><td>Forex (major pairs)</td><td class="tv">1.618× W1</td><td style="color:var(--grn);">HIGH ~50%</td></tr>
+          <tr class="hl"><td>Inside Wave C (down)</td><td class="tv">1.618–2.618×</td><td style="color:var(--grn);">HIGH ~55%</td></tr>
+          <tr><td>Market crash W3</td><td class="tv">2.618–4.236×</td><td style="color:var(--ylw);">MED ~35%</td></tr>
+          <tr class="hl"><td>Inside diagonal</td><td class="tv">0.618–1.000× W1</td><td style="color:var(--grn);">HIGH ~65%</td></tr>
+        </table>
+        <div class="cw" style="margin-top:12px;">
+          <h5>Sub-Wave Ratios Inside W3</h5>
+          <table class="tbl" style="font-size:11px;">
+            <tr><th>Sub-Wave</th><th>Ratio</th><th>Prob</th><th>Key Note</th></tr>
+            <tr class="hl"><td style="color:var(--red);">Sub-W2 of W3</td><td class="tv">0.382–0.500 of sub-W1</td><td style="color:var(--grn);">HIGH</td><td>Shallower than primary W2. Entry signal.</td></tr>
+            <tr><td style="color:var(--cyan);">③ of ③ (sub-W3)</td><td class="tv">1.618× sub-W1</td><td style="color:var(--grn);">HIGH ~55%</td><td>THE most explosive sub-wave. MACD peaks here.</td></tr>
+            <tr class="hl"><td style="color:var(--org);">Sub-W4 of W3</td><td class="tv">0.236–0.382 of sub-W3</td><td style="color:var(--grn);">HIGH</td><td>Very shallow — W3 of 3 doesn't allow deep sub-W4.</td></tr>
+            <tr><td style="color:var(--prp);">Sub-W5 of W3</td><td class="tv">= sub-W1 or 0.618×</td><td style="color:var(--grn);">HIGH</td><td>Often truncated if sub-W3 was extremely extended.</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- W4 & W5 -->
+  <div id="fib-w4w5" class="ic">
+    <div class="g2">
+      <div>
+        <div class="al al-gold"><span>★</span><span>Wave 4 depth is primarily determined by (1) Alternation with Wave 2, (2) whether Wave 3 was extended, and (3) pattern type. These three factors matter more than any fixed ratio.</span></div>
+        <h4 style="color:var(--org);margin:14px 0 10px;">Wave 4 — Retrace of Wave 3</h4>
+        <table class="tbl" style="font-size:11px;">
+          <tr><th>Retrace</th><th>Prob</th><th>Condition</th><th>Pattern Type</th></tr>
+          <tr><td class="tv">0.146</td><td style="color:var(--red);">RARE ~3%</td><td>After W3 = 4.236× W1</td><td>Tiny flat or running flat</td></tr>
+          <tr class="hl"><td class="tv">0.236</td><td style="color:var(--ylw);">MED ~20%</td><td>Extended W3, strong trend</td><td>Small flat or triangle</td></tr>
+          <tr><td class="tv" style="font-weight:700;">0.382 ★</td><td style="color:var(--grn);">HIGH ~40%</td><td>Standard — most common</td><td>Zigzag, flat, or triangle</td></tr>
+          <tr class="hl"><td class="tv">0.500</td><td style="color:var(--ylw);">MED ~20%</td><td>W2 was shallow (alternation)</td><td>Deep zigzag or expanded flat</td></tr>
+          <tr><td class="tv">0.618</td><td style="color:var(--org);">LOW ~12%</td><td>W2 very shallow; weak trend</td><td>Rare deep W4 zigzag</td></tr>
+          <tr class="hl"><td class="tv">&gt;0.618</td><td style="color:var(--red);">RARE</td><td>Likely count error</td><td>May be larger degree correction</td></tr>
+        </table>
+        <div class="rule r-gold" style="margin-top:10px;"><strong>Cross-check rule:</strong> If W2 = 61.8% (deep) → W4 = flat/triangle at 23.6–38.2%. If W2 = 38.2% (shallow) → W4 = deep zigzag at 50–61.8%.</div>
+      </div>
+      <div>
+        <div class="al al-prp"><span>★</span><span>The most reliable W5 method: use Wave 1 equality measured from the Wave 4 low — when Wave 3 was the extended wave (most common). Second method: 0.618× the entire W1–W3 move projected from W4 low.</span></div>
+        <h4 style="color:var(--prp);margin:14px 0 10px;">Wave 5 — Target Methods</h4>
+        <table class="tbl" style="font-size:11px;">
+          <tr><th>Method</th><th>Ratio</th><th>Prob</th><th>When W3 Was...</th></tr>
+          <tr class="hl"><td>W5 = W1 (from W4 low)</td><td class="tv" style="font-weight:700;">1.000× W1 ★</td><td style="color:var(--grn);">HIGH ~45%</td><td>Extended (1.618–2.618×)</td></tr>
+          <tr><td>W5 = 0.618× W1</td><td class="tv">0.618× W1</td><td style="color:var(--ylw);">MED ~20%</td><td>Extremely extended (4.236×)</td></tr>
+          <tr class="hl"><td>W5 = 0.618× (W1+W3)</td><td class="tv">0.618× combined</td><td style="color:var(--ylw);">MED ~15%</td><td>Extended W3 alternate method</td></tr>
+          <tr><td>W5 = 1.618× W1</td><td class="tv">1.618× W1</td><td style="color:var(--org);">LOW ~10%</td><td>Short W3 — W5 itself extending</td></tr>
+          <tr class="hl"><td>W5 = W3 (equality)</td><td class="tv">= W3</td><td style="color:var(--red);">RARE ~5%</td><td>W1 was the extended wave</td></tr>
+          <tr><td>Channel upper line</td><td class="tv">Channel method</td><td style="color:var(--ylw);">MED ~15%</td><td>Any — draw W2/W4 line parallel through W3</td></tr>
+        </table>
+        <div class="rule r-org" style="margin-top:10px;"><strong>W5 Extension Trigger:</strong> If W5 has equalled W1 AND is still advancing with increasing MACD → it may be extending. Draw W5 = 1.618× W1 as next target. Watch for ending diagonal.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABC -->
+  <div id="fib-abc" class="ic">
+    <div class="al al-gold"><span>★</span><span>The B wave is the most variable wave in EW. Its ratio is almost entirely determined by WHICH pattern is forming. The same "B" label can mean 38.2% (zigzag) to 138% (expanded flat/irregular). Pattern identification is essential before setting any B target.</span></div>
+    <div class="g2" style="margin-top:14px;">
+      <div>
+        <h4 style="color:var(--red);margin-bottom:10px;">Wave A — Retrace of Prior Impulse</h4>
+        <table class="tbl" style="font-size:11px;">
+          <tr><th>A retraces by...</th><th>Prob</th><th>Pattern Forming</th></tr>
+          <tr><td class="tv">0.236–0.382</td><td style="color:var(--org);">LOW ~12%</td><td>Running flat (very strong underlying trend)</td></tr>
+          <tr class="hl"><td class="tv">0.382–0.500</td><td style="color:var(--ylw);">MED ~25%</td><td>Regular flat or zigzag beginning</td></tr>
+          <tr><td class="tv">0.500–0.618</td><td style="color:var(--grn);">HIGH ~35%</td><td>Zigzag or expanded flat beginning</td></tr>
+          <tr class="hl"><td class="tv">0.618–0.764</td><td style="color:var(--ylw);">MED ~20%</td><td>Deep zigzag A wave</td></tr>
+          <tr><td class="tv">&gt;0.764</td><td style="color:var(--org);">LOW ~8%</td><td>Check: may be W3 down not Wave A</td></tr>
+        </table>
+        <div class="rule r-gold" style="margin-top:10px;"><strong>Key decoder:</strong> A in 5 sub-waves → zigzag forming. A in 3 sub-waves → flat forming (B will return near start of A).</div>
+      </div>
+      <div>
+        <h4 style="color:var(--blue);margin-bottom:10px;">Wave B — By Pattern Type</h4>
+        <table class="tbl" style="font-size:11px;">
+          <tr><th>Pattern</th><th>B Retrace of A</th><th>Prob</th></tr>
+          <tr><td style="color:var(--blue);">Zigzag B</td><td class="tv">0.382–0.500</td><td style="color:var(--grn);">HIGH ~45%</td></tr>
+          <tr class="hl"><td style="color:var(--blue);">Zigzag B (deeper)</td><td class="tv">0.500–0.618</td><td style="color:var(--ylw);">MED ~25%</td></tr>
+          <tr><td style="color:var(--prp);">Regular Flat B</td><td class="tv">0.900–1.050</td><td style="color:var(--grn);">HIGH ~60%</td></tr>
+          <tr class="hl"><td style="color:var(--org);">Expanded Flat B ⚠</td><td class="tv">1.050–1.382</td><td style="color:var(--grn);">HIGH ~55%</td></tr>
+          <tr><td style="color:var(--irr1);">★ Irregular Flat B</td><td class="tv">1.236–1.618+</td><td style="color:var(--ylw);">MED</td></tr>
+          <tr class="hl"><td style="color:var(--cyan);">Running Flat B</td><td class="tv">1.236–1.382</td><td style="color:var(--org);">LOW ~25%</td></tr>
+          <tr><td style="color:var(--grn);">Triangle B</td><td class="tv">0.618–0.764</td><td style="color:var(--ylw);">MED</td></tr>
+        </table>
+      </div>
+    </div>
+    <h4 style="color:var(--red);margin:16px 0 10px;">Wave C — All Pattern Targets</h4>
+    <table class="tbl" style="font-size:11px;">
+      <tr><th>Pattern</th><th>C vs A Ratio</th><th>Prob</th><th>Notes</th></tr>
+      <tr><td style="color:var(--blue);">Zigzag — standard</td><td class="tv" style="font-weight:700;">1.000× A ★</td><td style="color:var(--grn);">HIGH ~50%</td><td>C=A equality is THE primary target</td></tr>
+      <tr class="hl"><td style="color:var(--blue);">Zigzag — extended</td><td class="tv">1.272× A</td><td style="color:var(--ylw);">MED ~20%</td><td>Strong downward pressure</td></tr>
+      <tr><td style="color:var(--blue);">Zigzag — strong extended</td><td class="tv">1.618× A</td><td style="color:var(--org);">LOW ~15%</td><td>Rare in zigzag; more common in expanded</td></tr>
+      <tr class="hl"><td style="color:var(--prp);">Regular Flat</td><td class="tv">1.000× A</td><td style="color:var(--grn);">HIGH ~50%</td><td>C ends near original A start level</td></tr>
+      <tr><td style="color:var(--org);">Expanded Flat ★</td><td class="tv">1.618× A</td><td style="color:var(--grn);">HIGH ~55%</td><td>Most important expanded flat C target</td></tr>
+      <tr class="hl"><td style="color:var(--org);">Expanded Flat — strong</td><td class="tv">2.000× A</td><td style="color:var(--org);">LOW ~15%</td><td>Deep — panic/crash conditions</td></tr>
+      <tr><td style="color:var(--cyan);">Running Flat C</td><td class="tv">0.618–0.764× A</td><td style="color:var(--ylw);">MED ~50%</td><td>C fails to reach A end — trend extremely strong</td></tr>
+      <tr class="hl"><td style="color:var(--irr1);">★ Irregular Failure C</td><td class="tv">&lt;0.618× A</td><td style="color:var(--ylw);">MED</td><td>C fails completely — explosive trend resumption</td></tr>
+    </table>
+    <div class="g2" style="margin-top:12px;">
+      <div class="al al-red"><span>⚠</span><span><strong>Expanded Flat B = The Biggest EW Trap:</strong> When B exceeds 100% of A, most traders believe the trend resumed. They buy the new high — only to be devastated by the 1.618× A Wave C. B sub-divides in 3 = still corrective.</span></div>
+      <div class="al al-grn"><span>★</span><span><strong>B Wave Decoder:</strong> B stops at 61.8% → zigzag (C = A). B reaches 90–100% → flat (C = A). B exceeds A start → expanded/irregular flat (C = 1.618× A). Three B endings = three very different C targets.</span></div>
+    </div>
+  </div>
+
+  <!-- WXY & Triangles -->
+  <div id="fib-wxy" class="ic">
+    <div class="g2">
+      <div>
+        <h4 style="color:var(--cyan);margin-bottom:10px;">W-X-Y Complex Corrections</h4>
+        <table class="tbl" style="font-size:11px;">
+          <tr><th>Wave</th><th>Fibonacci</th><th>Prob</th><th>Key Note</th></tr>
+          <tr class="hl"><td style="color:var(--cyan);">X wave retrace of W</td><td class="tv">0.618 ★</td><td style="color:var(--grn);">HIGH ~40%</td><td>Most common golden ratio connector</td></tr>
+          <tr><td style="color:var(--cyan);">X wave (shallow)</td><td class="tv">0.382–0.500</td><td style="color:var(--ylw);">MED</td><td>Weak X — strong Y follows</td></tr>
+          <tr class="hl"><td style="color:var(--cyan);">X wave (deep)</td><td class="tv">0.764–0.786</td><td style="color:var(--org);">LOW</td><td>Complex correction may extend to triple three</td></tr>
+          <tr><td style="color:var(--cyan);">Y wave vs W</td><td class="tv">1.000 (=W) ★</td><td style="color:var(--grn);">HIGH ~45%</td><td>Y=W equality creates textbook double-bottom/top</td></tr>
+          <tr class="hl"><td style="color:var(--cyan);">Y wave (smaller)</td><td class="tv">0.618× W</td><td style="color:var(--ylw);">MED</td><td>Y shorter than W</td></tr>
+          <tr><td style="color:var(--cyan);">Y wave (extended)</td><td class="tv">1.618× W</td><td style="color:var(--org);">LOW</td><td>Rare extended Y</td></tr>
+        </table>
+        <div class="al al-warn" style="margin-top:10px;"><span>⚠</span><span>X wave exceeding 100% of W is invalid. Always corrective. 0.618 is by far the most reliable X wave retrace.</span></div>
+      </div>
+      <div>
+        <h4 style="color:var(--grn);margin-bottom:10px;">Triangle Fibonacci Ratios</h4>
+        <table class="tbl" style="font-size:11px;">
+          <tr><th>Leg</th><th>Ratio vs Prior</th><th>Prob</th><th>Note</th></tr>
+          <tr class="hl"><td style="color:var(--red);">B vs A</td><td class="tv">0.618–0.786</td><td style="color:var(--grn);">HIGH ~65%</td><td>Each successive leg shorter</td></tr>
+          <tr><td style="color:var(--org);">C vs B</td><td class="tv">0.618–0.786</td><td style="color:var(--grn);">HIGH ~65%</td><td>Successive compression</td></tr>
+          <tr class="hl"><td style="color:var(--prp);">D vs C</td><td class="tv">0.618–0.786</td><td style="color:var(--grn);">HIGH ~65%</td><td>Triangle tightening</td></tr>
+          <tr><td style="color:var(--blue);">E vs D</td><td class="tv">0.618–0.786</td><td style="color:var(--grn);">HIGH ~65%</td><td>Shortest — setup for thrust</td></tr>
+          <tr class="hl"><td style="color:var(--ylw);">Thrust after E ★</td><td class="tv">= A leg (widest)</td><td style="color:var(--grn);">HIGH ~70%</td><td>PRIMARY thrust target</td></tr>
+          <tr><td style="color:var(--ylw);">Thrust (truncated)</td><td class="tv">0.618× A</td><td style="color:var(--org);">LOW ~20%</td><td>If triangle is Wave B</td></tr>
+        </table>
+        <div class="rule r-cyan" style="margin-top:10px;"><strong>Triangle time rule:</strong> Each leg time follows the same 0.618 ratio. If A took 10 bars → B≈6, C≈4, D≈3, E≈2. Projects when E completes.</div>
+        <div class="cw" style="margin-top:12px;">
+          <h5>Thrust Target by Triangle Position</h5>
+          <table class="tbl" style="font-size:11px;">
+            <tr><th>Position</th><th>Thrust Target</th><th>Prob</th></tr>
+            <tr class="hl"><td>Wave 4 of impulse</td><td class="tv">= A (widest leg)</td><td style="color:var(--grn);">HIGH ~70%</td></tr>
+            <tr><td>Wave B of zigzag</td><td class="tv">= C leg or 0.618×A</td><td style="color:var(--ylw);">MED ~50%</td></tr>
+            <tr class="hl"><td>X wave in W-X-Y</td><td class="tv">0.618× A (truncated)</td><td style="color:var(--ylw);">MED ~45%</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOG vs ARITHMETIC -->
+  <div id="fib-log" class="ic">
+    <div class="al al-gold"><span>★</span><span>Using the wrong scale can make Fibonacci extensions and Elliott Wave channels point to the wrong targets by 20–40%+. Horizontal retracement levels are IDENTICAL on both scales. Extension projections and channel lines are DIFFERENT — the choice is not cosmetic.</span></div>
+    <div class="g2" style="margin-top:16px;">
+      <div class="card">
+        <h3 style="color:var(--blue);">📐 Arithmetic (Linear) Scale</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:12px;">Equal vertical distance = equal price change in absolute $ terms. $10→$20 looks same height as $110→$120.</p>
+        <div class="rule r-grn"><strong>✓ Use Arithmetic:</strong> Price range less than 2:1 (low to high)</div>
+        <div class="rule r-grn"><strong>✓ Use Arithmetic:</strong> Intraday charts (1min–4H) — price moves too small for log to matter</div>
+        <div class="rule r-grn"><strong>✓ Use Arithmetic:</strong> Any wave spanning less than 3× the starting price</div>
+        <div class="rule r-grn"><strong>✓ Use Arithmetic:</strong> Horizontal Fib retracement lines — always same on both</div>
+        <div class="rule r-grn"><strong>✓ Use Arithmetic:</strong> Minor/minute degree waves (hours to days)</div>
+        <hr>
+        <div class="rule r-red"><strong>✗ Arithmetic Distorts:</strong> When price has moved more than 100% from wave start</div>
+        <div class="rule r-red"><strong>✗ Arithmetic Distorts:</strong> Long-term channels spanning decades</div>
+        <div class="rule r-red"><strong>✗ Arithmetic Distorts:</strong> Commodity secular bulls (Gold $250→$5,500+)</div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--gold);">📊 Logarithmic (Log) Scale</h3>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:12px;">Equal vertical distance = equal PERCENTAGE change. $10→$20 (+100%) looks same height as $100→$200 (+100%).</p>
+        <div class="rule r-grn"><strong>✓ Use Log:</strong> Price has moved more than 100% (doubled) from chart start</div>
+        <div class="rule r-grn"><strong>✓ Use Log:</strong> Weekly and monthly charts spanning years or decades</div>
+        <div class="rule r-grn"><strong>✓ Use Log:</strong> Gold, Silver, Oil — commodity secular bull markets</div>
+        <div class="rule r-grn"><strong>✓ Use Log:</strong> Cryptocurrency — moves of 1,000%–10,000% are normal</div>
+        <div class="rule r-grn"><strong>✓ Use Log:</strong> W3 extension projections when W3 target is 2× starting price</div>
+        <div class="rule r-grn"><strong>✓ Use Log:</strong> Elliott Wave channels on primary and cycle degree waves</div>
+        <hr>
+        <div class="rule r-red"><strong>✗ Log Distorts:</strong> Narrow price ranges — log and arithmetic nearly identical</div>
+        <div class="rule r-red"><strong>✗ Log Distorts:</strong> Horizontal Fibonacci retracement lines (same on both)</div>
+      </div>
+    </div>
+    <div class="al al-red" style="margin-top:14px;"><span>⚠</span><span><strong>Critical Distinction:</strong> Horizontal Fibonacci RETRACEMENT lines (0.382, 0.618, etc.) are mathematically IDENTICAL on both scales — they are simply price levels. Fibonacci EXTENSION projections and CHANNEL LINES are DIFFERENT on log vs arithmetic. Always draw channels on the same scale used for the wave analysis.</span></div>
+    <div class="cw" style="margin-top:14px;">
+      <h5>Scale Decision Checklist</h5>
+      <table class="tbl" style="font-size:11px;">
+        <tr><th>Condition</th><th>Scale to Use</th></tr>
+        <tr class="hl"><td>Wave move &lt; 100%</td><td style="color:var(--blue);">Arithmetic</td></tr>
+        <tr><td>Wave move 100–300%</td><td style="color:var(--ylw);">Test both — use whichever gives clean channels where W2 and W4 touch lower line</td></tr>
+        <tr class="hl"><td>Wave move &gt; 300%</td><td style="color:var(--gold);">Log mandatory</td></tr>
+        <tr><td>Intraday chart (any TF)</td><td style="color:var(--blue);">Arithmetic</td></tr>
+        <tr class="hl"><td>Weekly/Monthly chart</td><td style="color:var(--gold);">Log</td></tr>
+        <tr><td>Horizontal Fib retracements</td><td style="color:var(--grn);">Either (identical)</td></tr>
+        <tr class="hl"><td>Fib extension projections</td><td style="color:var(--gold);">Log if move &gt; 100%</td></tr>
+        <tr><td>Gold/Silver analysis</td><td style="color:var(--gold);">Log always (weekly+)</td></tr>
+        <tr class="hl"><td>Crypto analysis</td><td style="color:var(--gold);">Log always</td></tr>
+        <tr><td>Short-term stock trade</td><td style="color:var(--blue);">Arithmetic</td></tr>
+      </table>
+      <div class="al al-cyan" style="margin-top:10px;"><span>💡</span><span><strong>Empirical test:</strong> Draw your EW channel on BOTH scales. Correct scale = channel where W2 low AND W4 low both touch the lower channel line, AND W5 ends cleanly at the upper channel line.</span></div>
+    </div>
+  </div>
+
+  <!-- MASTER REFERENCE -->
+  <div id="fib-master" class="ic">
+    <div class="al al-gold"><span>★</span><span>Single-page summary of every key Fibonacci ratio across all waves, ranked by probability. Primary reference table for rapid chart analysis.</span></div>
+    <table class="tbl" style="font-size:11px;margin-top:14px;">
+      <tr><th>Wave</th><th>Role</th><th style="color:var(--grn);">HIGH (55%+)</th><th style="color:var(--ylw);">MED (30–55%)</th><th style="color:var(--org);">LOW (15–30%)</th><th style="color:var(--red);">RARE (&lt;15%)</th><th>Key Context Factor</th></tr>
+      <tr class="hl"><td style="color:var(--grn);"><strong>W2</strong> retrace W1</td><td>Retracement</td><td>0.618 ~45%</td><td>0.500, 0.764</td><td>0.382, 0.786</td><td>0.900+</td><td>Uptrend OK deeper; Downtrend W2 shallower (38.2–50%)</td></tr>
+      <tr><td style="color:var(--cyan);"><strong>W3</strong> ext W1</td><td>Extension</td><td>1.618 ~40%</td><td>2.618, 2.000</td><td>1.272, 3.618</td><td>4.236</td><td>Commodity = 2.618 common; Crypto = 4.236 possible; Diagonal = 0.618–1.0</td></tr>
+      <tr class="hl"><td style="color:var(--org);"><strong>W4</strong> retrace W3</td><td>Retracement</td><td>0.382 ~40%</td><td>0.236, 0.500</td><td>0.618</td><td>0.146, &gt;0.618</td><td>Alternation with W2 is the primary determinant</td></tr>
+      <tr><td style="color:var(--prp);"><strong>W5</strong> from W4 low</td><td>Extension</td><td>1.000 (=W1) ~45%</td><td>0.618×W1, 0.618×(W1+W3)</td><td>1.618×W1</td><td>=W3</td><td>W3 extended → W5=W1; W1 extended → W5=W3</td></tr>
+      <tr class="hl"><td style="color:var(--red);"><strong>Zigzag B</strong> retrace A</td><td>Retracement</td><td>0.382–0.500 ~45%</td><td>0.500–0.618</td><td>0.618–0.764</td><td>&gt;0.764</td><td>B MUST NOT exceed start of A in zigzag — hard rule</td></tr>
+      <tr><td style="color:var(--red);"><strong>Zigzag C</strong> vs A</td><td>Ext from B</td><td>1.000 (=A) ~50%</td><td>1.272</td><td>1.618</td><td>0.618, 2.618</td><td>Uptrend = C=A most common; Downtrend = C extends</td></tr>
+      <tr class="hl"><td style="color:var(--prp);"><strong>Flat B</strong> retrace A</td><td>Retracement</td><td>0.900–1.050 (Reg, 60%)</td><td>1.050–1.236 (Exp)</td><td>1.236–1.382 (Running)</td><td>&gt;1.382</td><td>Regular: B≈A start; Expanded: B EXCEEDS A start (the trap)</td></tr>
+      <tr><td style="color:var(--org);"><strong>Expanded Flat C</strong> vs A</td><td>Ext from B</td><td>1.618 ~55%</td><td>2.000</td><td>1.272, 2.618</td><td>&gt;2.618</td><td>B must have exceeded A start to qualify</td></tr>
+      <tr class="hl"><td style="color:var(--cyan);"><strong>X wave</strong> retrace W</td><td>Retracement</td><td>0.618 ~40%</td><td>0.382, 0.500</td><td>0.764–0.786</td><td>&gt;0.786</td><td>X always corrective — 0.618 is most common</td></tr>
+      <tr><td style="color:var(--cyan);"><strong>Y wave</strong> vs W</td><td>Extension</td><td>1.000 (=W) ~45%</td><td>0.618×W, 1.272×W</td><td>1.618×W</td><td>2.618×W</td><td>W=Y equality creates textbook double-bottom/top</td></tr>
+      <tr class="hl"><td style="color:var(--grn);"><strong>Triangle legs</strong></td><td>Each vs prior</td><td>0.618 ~65%</td><td>0.764</td><td>0.786</td><td>&lt;0.500</td><td>Strict geometric ratio — each leg 0.618× prior</td></tr>
+      <tr><td style="color:var(--ylw);"><strong>Triangle Thrust</strong></td><td>Ext from E</td><td>=A leg (widest) ~70%</td><td>0.618×A</td><td>1.272×A</td><td>&gt;1.272×A</td><td>Thrust always measured from E breakout point</td></tr>
+      <tr class="hl"><td style="color:var(--org);"><strong>Ending Diag W3</strong> vs W1</td><td>Compression</td><td>0.618×W1 ~70%</td><td>0.764×W1</td><td>1.000×W1</td><td>&gt;1.0</td><td>Each wave shorter — converging wedge definition</td></tr>
+      <tr><td style="color:var(--red);"><strong>Post-diagonal reversal</strong></td><td>Target</td><td>= Start of diagonal ~80%</td><td>W4 level</td><td>W2 level</td><td>—</td><td>Fastest reversal in all of EW — 1/3 of build time</td></tr>
+    </table>
+    <div class="al al-grn" style="margin-top:16px;"><span>✓</span><span><strong>The Confluence Protocol:</strong> (1) Mark primary Fibonacci target. (2) Mark secondary. (3) Look for any OTHER independent Fib measurement clustering within 0.5–1% of either target. (4) That cluster = HPRZ (High Probability Reversal Zone). (5) Add RSI + candle confirmation. Three Fibonacci + RSI divergence + candle = highest conviction EW trade.</span></div>
+    <div class="al al-warn" style="margin-top:8px;"><span>⚠</span><span><strong>Scale reminder:</strong> All ratios refer to price-based measurements. For Gold, Silver, or Crypto on weekly/monthly charts → apply on LOG scale. For intraday waves or narrow corrective ranges → arithmetic is equivalent. The ratio percentages don't change — only the price levels they map to.</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SECTION: METHODS ═══════════════════════ -->
+<div id="sec-methods" class="sec">
+  <div class="st">Wave Identification Methods</div>
+  <div class="ss">10 Professional Techniques for Counting Elliott Waves</div>
+
+  <div class="al al-gold"><span>ℹ</span><span>No single indicator confirms an EW count. Professional analysts stack multiple methods — Fibonacci ratios, channel analysis, RSI behavior, volume, momentum, and price action — to build a high-probability count. Use at least 3 methods before committing to a trade.</span></div>
+
+  <!-- Method 1 -->
+  <div class="mcard" onclick="this.classList.toggle('open')">
+    <div class="mcard-head">
+      <div class="mcard-stripe" style="background:var(--m1);"></div>
+      <div class="mcard-icon" style="color:var(--m1);">📐</div>
+      <div class="mcard-info">
+        <h3 style="color:var(--m1);">Method 1 — Fibonacci Retracement & Extension</h3>
+        <p>The primary mathematical tool. Validates wave endpoints and projects targets.</p>
+        <div class="mcard-badges"><span class="bdg bdg-gold">Primary</span><span class="bdg bdg-gold">All Waves</span></div>
+      </div>
+      <div class="mcard-toggle">▼</div>
+    </div>
+    <div class="mcard-body"><div class="mbody">
+      <div class="g2">
+        <div>
+          <div class="rule r-gold">W2 retrace: 50%, 61.8%, 78.6% of W1</div>
+          <div class="rule r-gold">W3 target: 1.618 × W1 from W2 end (most common)</div>
+          <div class="rule r-gold">W4 retrace: 23.6%, 38.2% of W3</div>
+          <div class="rule r-gold">W5 target: Equal to W1, or 0.618 × W1</div>
+          <div class="rule r-irr" style="margin-top:8px;">★ Irregular B: extends 1.0–1.618 × A beyond start</div>
+          <div class="rule r-irr">★ Irregular C: target from B extreme, 1.0–1.618 × A</div>
+        </div>
+        <div>
+          <div class="solbox">
+            <h4>Fibonacci Cluster Method</h4>
+            <p>Project Fib ratios from multiple waves. Where 2+ ratios converge within a tight zone = High Probability Reversal Zone (HPRZ). A W2 retrace of 61.8% + a W4 Fib channel line meeting at the same price is high conviction entry.</p>
+          </div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Method 2 -->
+  <div class="mcard" onclick="this.classList.toggle('open')">
+    <div class="mcard-head">
+      <div class="mcard-stripe" style="background:var(--m2);"></div>
+      <div class="mcard-icon" style="color:var(--m2);">📏</div>
+      <div class="mcard-info">
+        <h3 style="color:var(--m2);">Method 2 — Elliott Wave Channel Analysis</h3>
+        <p>Draw channels to project Wave 4 and Wave 5 targets geometrically.</p>
+        <div class="mcard-badges"><span class="bdg bdg-grn">Geometric</span><span class="bdg bdg-grn">Projection</span></div>
+      </div>
+      <div class="mcard-toggle">▼</div>
+    </div>
+    <div class="mcard-body"><div class="mbody">
+      <div class="g2">
+        <div>
+          <div class="rule r-grn">Step 1: Connect W1 end and W3 end → upper channel line</div>
+          <div class="rule r-grn">Step 2: Draw parallel from W2 end → lower channel line</div>
+          <div class="rule r-grn">Wave 4 should end near the lower channel line</div>
+          <div class="rule r-grn">Wave 5 should end near the upper channel line</div>
+          <div class="rule r-gold">If W5 overshoots channel → ending diagonal likely</div>
+          <div class="rule r-irr" style="margin-top:8px;">★ Irregular corrections often break channels temporarily — use channels on PRIMARY waves, not inside the irregular structure</div>
+        </div>
+        <div>
+          <div class="rule r-blue">Acceleration channel: if W3 is extended, redraw channel after W4</div>
+          <div class="rule r-org">Sub-wave channels: draw channels on W3 sub-waves for micro-targets</div>
+          <div class="rule r-cyan">Diagonal channels: converging lines — price should touch both boundaries</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Method 3 -->
+  <div class="mcard" onclick="this.classList.toggle('open')">
+    <div class="mcard-head">
+      <div class="mcard-stripe" style="background:var(--m3);"></div>
+      <div class="mcard-icon" style="color:var(--m3);">📊</div>
+      <div class="mcard-info">
+        <h3 style="color:var(--m3);">Method 3 — MACD Wave Confirmation</h3>
+        <p>MACD divergence and zero-line crossings confirm wave transitions.</p>
+        <div class="mcard-badges"><span class="bdg bdg-blue">Momentum</span><span class="bdg bdg-blue">Divergence</span></div>
+      </div>
+      <div class="mcard-toggle">▼</div>
+    </div>
+    <div class="mcard-body"><div class="mbody">
+      <div class="g2">
+        <div>
+          <div class="rule r-blue">W3 should show the HIGHEST MACD histogram bar of the impulse</div>
+          <div class="rule r-blue">W5 makes new price high but MACD lower → bearish divergence = W5 ending</div>
+          <div class="rule r-blue">MACD crossover above/below zero confirms W2/W4 completion</div>
+          <div class="rule r-blue">W1 sub-waves: MACD builds from below zero to above</div>
+          <div class="rule r-irr" style="margin-top:8px;">★ Irregular B wave: MACD will show strong momentum — looks like a new impulse. Watch: does it sub-divide in 3? Then it's still corrective.</div>
+        </div>
+        <div>
+          <div class="rule r-org">Settings: 12/26/9 for daily; 5/13/4 for hourly; 3/10/1 for scalping</div>
+          <div class="rule r-gold">A MACD histogram declining while price rising = W5 divergence warning</div>
+          <div class="rule r-red">MACD divergence alone is NOT enough — needs Fib confluence</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Method 4 -->
+  <div class="mcard" onclick="this.classList.toggle('open')">
+    <div class="mcard-head">
+      <div class="mcard-stripe" style="background:var(--m4);"></div>
+      <div class="mcard-icon" style="color:var(--m4);">📦</div>
+      <div class="mcard-info">
+        <h3 style="color:var(--m4);">Method 4 — Volume Analysis</h3>
+        <p>Volume confirms the authenticity of each wave and warns of false moves.</p>
+        <div class="mcard-badges"><span class="bdg bdg-prp">Volume</span><span class="bdg bdg-prp">Confirmation</span></div>
+      </div>
+      <div class="mcard-toggle">▼</div>
+    </div>
+    <div class="mcard-body"><div class="mbody">
+      <div class="g2">
+        <div>
+          <div class="rule r-prp">W1: Expanding volume from the prior downtrend low</div>
+          <div class="rule r-prp">W2: Volume contracts — the correction lacks conviction</div>
+          <div class="rule r-prp">W3: HIGHEST VOLUME of the entire impulse — institutional buying</div>
+          <div class="rule r-prp">W4: Volume contracts again — consolidation is quiet</div>
+          <div class="rule r-prp">W5: Volume often lower than W3 — divergence warning</div>
+        </div>
+        <div>
+          <div class="rule r-irr" style="margin-top:0;">★ Irregular B wave often shows STRONG volume — looks like real breakout. But if B sub-divides in 3 AND volume starts declining mid-B → it's corrective.</div>
+          <div class="rule r-grn" style="margin-top:8px;">Running corrections: very LOW volume overall — market moving higher on thin air → confirms explosive continuation</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Methods 5-10 condensed -->
+  <div class="mcard" onclick="this.classList.toggle('open')">
+    <div class="mcard-head">
+      <div class="mcard-stripe" style="background:var(--m5);"></div>
+      <div class="mcard-icon" style="color:var(--m5);">🕯</div>
+      <div class="mcard-info">
+        <h3 style="color:var(--m5);">Method 5 — Price Action & Candlestick Patterns</h3>
+        <p>Key reversal candles confirm wave endpoints at Fibonacci levels.</p>
+        <div class="mcard-badges"><span class="bdg bdg-org">Price Action</span><span class="bdg bdg-org">Reversal</span></div>
+      </div>
+      <div class="mcard-toggle">▼</div>
+    </div>
+    <div class="mcard-body"><div class="mbody">
+      <div class="g2">
+        <div>
+          <div class="rule r-org">W2 end: Hammer, Bullish Engulfing, Morning Star at Fib support</div>
+          <div class="rule r-org">W3 start: Strong bullish candles, gaps up, marubozu — confirms</div>
+          <div class="rule r-org">W4 end: Inside bars, doji clusters at lower channel / Fib support</div>
+          <div class="rule r-org">W5 end: Shooting star, bearish engulfing, dark cloud cover at extension</div>
+        </div>
+        <div>
+          <div class="rule r-irr">★ Irregular B peak: Shooting star or bearish engulfing at B extreme (1.236–1.618 × A) → high-probability C trade setup</div>
+          <div class="rule r-irr">★ Running correction end: rapid small-range bars → coiling before explosion</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="mcard" onclick="this.classList.toggle('open')">
+    <div class="mcard-head">
+      <div class="mcard-stripe" style="background:var(--m6);"></div>
+      <div class="mcard-icon" style="color:var(--m6);">〰</div>
+      <div class="mcard-info">
+        <h3 style="color:var(--m6);">Method 6 — Moving Average Alignment</h3>
+        <p>EMA stacks and dynamic support/resistance confirm wave direction.</p>
+        <div class="mcard-badges"><span class="bdg bdg-cyan">Trend</span><span class="bdg bdg-cyan">Dynamic S/R</span></div>
+      </div>
+      <div class="mcard-toggle">▼</div>
+    </div>
+    <div class="mcard-body"><div class="mbody">
+      <div class="g2">
+        <div>
+          <div class="rule r-cyan">Bullish EMA stack: 8 &gt; 21 &gt; 55 EMA → confirms W1/W3/W5 uptrend</div>
+          <div class="rule r-cyan">W2 bottom: often touches 21 or 55 EMA — buy zone</div>
+          <div class="rule r-cyan">W4 bottom: often bounces off 55 EMA or 100 EMA</div>
+          <div class="rule r-cyan">W3 of a correction: 20 SMA may act as resistance in downtrend</div>
+        </div>
+        <div>
+          <div class="rule r-irr">★ Irregular B: price breaks above all EMAs (looks bullish!) but EMAs start to curl down → divergence signal that B is corrective</div>
+          <div class="rule r-gold">After W5 top: EMAs begin to flatten and cross bearish → A-B-C correction begins</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="mcard" onclick="this.classList.toggle('open')">
+    <div class="mcard-head">
+      <div class="mcard-stripe" style="background:var(--m7);"></div>
+      <div class="mcard-icon" style="color:var(--m7);">⚡</div>
+      <div class="mcard-info">
+        <h3 style="color:var(--m7);">Method 7 — Momentum (Stochastic / ROC)</h3>
+        <p>Oscillator overbought/oversold signals confirm wave completion zones.</p>
+        <div class="mcard-badges"><span class="bdg bdg-warn">Momentum</span><span class="bdg bdg-warn">OB/OS</span></div>
+      </div>
+      <div class="mcard-toggle">▼</div>
+    </div>
+    <div class="mcard-body"><div class="mbody">
+      <div class="g2">
+        <div>
+          <div class="rule r-warn">W3: Stochastic stays overbought for extended periods → strongest wave</div>
+          <div class="rule r-warn">W5: Stochastic makes LOWER high vs W3 → momentum divergence = W5 ending</div>
+          <div class="rule r-warn">W2 end: Stochastic oversold + hooking up → W3 launch signal</div>
+          <div class="rule r-warn">W4 end: Stochastic crosses up from OS → W5 launch signal</div>
+        </div>
+        <div>
+          <div class="rule r-irr">★ Irregular B: Stochastic will reach OB just like W3 — but it's 3 waves! If stochastic hooks down from OB and price hasn't exceeded prior W3/W5 level → B wave top, C incoming</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="mcard" onclick="this.classList.toggle('open')">
+    <div class="mcard-head">
+      <div class="mcard-stripe" style="background:var(--m8);"></div>
+      <div class="mcard-icon" style="color:var(--m8);">⏱</div>
+      <div class="mcard-info">
+        <h3 style="color:var(--m8);">Method 8 — Time Analysis (Fibonacci Time)</h3>
+        <p>Corrections often last a Fibonacci ratio of the preceding impulse in time.</p>
+        <div class="mcard-badges"><span class="bdg bdg-warn">Time</span><span class="bdg bdg-warn">Duration</span></div>
+      </div>
+      <div class="mcard-toggle">▼</div>
+    </div>
+    <div class="mcard-body"><div class="mbody">
+      <div class="g2">
+        <div>
+          <div class="rule r-warn">W2 duration: 38.2%–61.8% of W1 duration in time</div>
+          <div class="rule r-warn">W4 duration: often equals W2 (time alternation) or 61.8% of W3</div>
+          <div class="rule r-warn">Fib time projections from wave start: W3 peak often at 1.618 × W1 time</div>
+        </div>
+        <div>
+          <div class="rule r-irr">★ Irregular corrections: often take MORE time than regular corrections. If a correction is taking 2–3× longer than expected → suspect a complex or irregular structure</div>
+          <div class="rule r-gold">If correction exceeds 100% of impulse in time → degree is likely higher than assumed</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="mcard" onclick="this.classList.toggle('open')">
+    <div class="mcard-head">
+      <div class="mcard-stripe" style="background:var(--m9);"></div>
+      <div class="mcard-icon" style="color:var(--m9);">🎯</div>
+      <div class="mcard-info">
+        <h3 style="color:var(--m9);">Method 9 — Sentiment & Market Breadth</h3>
+        <p>Sentiment extremes and breadth divergences confirm major wave endings.</p>
+        <div class="mcard-badges"><span class="bdg bdg-red">Sentiment</span><span class="bdg bdg-red">Contrarian</span></div>
+      </div>
+      <div class="mcard-toggle">▼</div>
+    </div>
+    <div class="mcard-body"><div class="mbody">
+      <div class="g2">
+        <div>
+          <div class="rule r-red">W5 peak: extreme bullish sentiment (AAII bulls &gt;60%), fear index low</div>
+          <div class="rule r-red">W2 bottom: extreme bearish sentiment — most traders expect the decline to continue</div>
+          <div class="rule r-red">W3: sentiment shifts from bearish to neutral to bullish</div>
+        </div>
+        <div>
+          <div class="rule r-irr">★ Irregular B wave: sentiment often reaches extreme bullish AGAIN (echoing W5 sentiment). This is a secondary trap. Fade extreme sentiment when B sub-divides in 3.</div>
+          <div class="rule r-grn">After irregular structure completes: sentiment often resets to neutral → perfect launch for next impulse</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="mcard" onclick="this.classList.toggle('open')">
+    <div class="mcard-head">
+      <div class="mcard-stripe" style="background:var(--m10);"></div>
+      <div class="mcard-icon" style="color:var(--m10);">🔬</div>
+      <div class="mcard-info">
+        <h3 style="color:var(--m10);">Method 10 — Neely's NEoWave Rules</h3>
+        <p>Advanced structural rules from Glenn Neely's NEoWave methodology for precise counting.</p>
+        <div class="mcard-badges"><span class="bdg bdg-grn">Advanced</span><span class="bdg bdg-grn">NEoWave</span></div>
+      </div>
+      <div class="mcard-toggle">▼</div>
+    </div>
+    <div class="mcard-body"><div class="mbody">
+      <div class="g2">
+        <div>
+          <div class="rule r-grn">Rule of Similarity: waves of the same degree should be similar in price &amp; time</div>
+          <div class="rule r-grn">Progress Label: every segment must be categorized before moving to next</div>
+          <div class="rule r-grn">Retracement rules: define minimum/maximum retrace for each wave type</div>
+          <div class="rule r-grn">Complexity rule: corrective waves can be no more complex than the prior motive wave</div>
+        </div>
+        <div>
+          <div class="rule r-irr">★ NEoWave on Irregular: Neely's "Missing Wave" concept — when the logic of a count requires a wave that isn't visible, the market may have formed an irregular structure. Look for condensed, overlapping price action.</div>
+          <div class="rule r-gold">Best use: eliminate invalid counts systematically, leaving only valid structures</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SECTION: RSI ═══════════════════════ -->
+<div id="sec-rsi" class="sec">
+  <div class="st">RSI + Elliott Wave System</div>
+  <div class="ss">Wave Signatures · Divergence Types · Wave Finder · False Signals · Trade Setups</div>
+
+  <div class="al al-blue"><span>ℹ</span><span>RSI doesn't just show overbought/oversold — it shows the <strong>momentum character</strong> of each wave. Because each Elliott Wave reflects a specific phase of market psychology, each wave creates a characteristic RSI pattern that repeats reliably. EW + RSI gives two independent confirmation signals: when both agree → high conviction. When they conflict → wait.</span></div>
+
+  <div class="itabs" style="margin-top:16px;">
+    <button class="itab on" onclick="itab(this,'rsi-foundation')">Foundation</button>
+    <button class="itab" onclick="itab(this,'rsi-signatures')">Wave Signatures</button>
+    <button class="itab" onclick="itab(this,'rsi-corrective')">Corrective RSI</button>
+    <button class="itab" onclick="itab(this,'rsi-divergence')">Divergence</button>
+    <button class="itab" onclick="itab(this,'rsi-finder')">Wave Finder</button>
+    <button class="itab" onclick="itab(this,'rsi-traps')">False Signals</button>
+    <button class="itab" onclick="itab(this,'rsi-setups')">Trade Setups</button>
+  </div>
+
+  <!-- FOUNDATION -->
+  <div id="rsi-foundation" class="ic on">
+    <div class="g2" style="margin-bottom:20px;">
+      <div class="card" style="border-color:var(--gdim);">
+        <h3>RSI Range by Trend Phase</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+          <div style="padding:10px 14px;border-radius:6px;background:rgba(61,220,132,.08);border-left:3px solid var(--grn);font-size:11.5px;">
+            <strong style="color:var(--grn);font-size:15px;">40–90</strong><br>
+            <strong>BULL TREND RSI RANGE</strong> — RSI rarely goes below 40. Dips to 40–50 = Wave 2 or Wave 4 buying zones. Spikes to 70–85+ = Wave 3 peaks.
+          </div>
+          <div style="padding:10px 14px;border-radius:6px;background:rgba(255,138,48,.08);border-left:3px solid var(--org);font-size:11.5px;">
+            <strong style="color:var(--org);font-size:15px;">10–60</strong><br>
+            <strong>BEAR TREND RSI RANGE</strong> — RSI rarely goes above 60. Bounces to 50–60 = corrective B waves. Drops to 20–30 = Wave 3 or C lows.
+          </div>
+          <div style="padding:10px 14px;border-radius:6px;background:rgba(74,168,248,.08);border-left:3px solid var(--blue);font-size:11.5px;">
+            <strong style="color:var(--blue);font-size:15px;">40–65</strong><br>
+            <strong>TRANSITION / WAVE 4 ZONE</strong> — RSI consolidates here. Neither overbought nor oversold. Seen in Wave 4 triangles and complex corrections.
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Optimal RSI Settings</h3>
+        <table class="tbl" style="font-size:11px;margin-bottom:14px;">
+          <tr><th>Timeframe</th><th>RSI Period</th><th>Best Use</th></tr>
+          <tr><td>Monthly/Weekly</td><td class="tv">21</td><td>Primary/Cycle degree — smoother, fewer false signals</td></tr>
+          <tr class="hl"><td>Daily / 4H</td><td class="tv">14</td><td>Standard. Best for EW identification. Default.</td></tr>
+          <tr><td>1H / 15M</td><td class="tv">8–14</td><td>Minor/Minute degree waves</td></tr>
+          <tr class="hl"><td>Scalping (5M–1M)</td><td class="tv">5–7</td><td>Subminuette — more sensitive, more noise</td></tr>
+        </table>
+        <div class="cw">
+          <h5>Key RSI Levels to Watch</h5>
+          <table class="tbl" style="font-size:11px;">
+            <tr><th>Level</th><th>Meaning</th></tr>
+            <tr><td style="color:var(--red);font-weight:600;">80+</td><td>Extreme overbought — Wave 3 peak or Wave 5 blow-off</td></tr>
+            <tr class="hl"><td style="color:var(--red);">70</td><td>Overbought — Wave 3 completion zone</td></tr>
+            <tr><td style="color:var(--grn);font-weight:600;">50</td><td>Bull/Bear midline — CRITICAL pivot for trend direction</td></tr>
+            <tr class="hl"><td style="color:var(--org);">30</td><td>Oversold — Wave A or Wave C low zone</td></tr>
+            <tr><td style="color:var(--red2);font-weight:600;">20–</td><td>Extreme oversold — Wave 3 of Wave C capitulation</td></tr>
+          </table>
+        </div>
+        <div class="rule r-gold" style="margin-top:10px;">In a <strong>bull trend</strong>: RSI bouncing OFF 50 (holding above) = Wave 2 or Wave 4 entry signal. RSI breaking BELOW 50 and staying there = warning that the trend is changing.</div>
+      </div>
+    </div>
+    <div class="cw">
+      <h5>RSI Behavior by Wave — Quick Reference</h5>
+      <table class="tbl" style="font-size:11px;">
+        <tr><th>Wave</th><th>RSI Zone</th><th>RSI Action</th><th>Key Signal</th><th>Trade Action</th></tr>
+        <tr><td style="color:var(--grn);">Wave 1</td><td>45→65</td><td>Crosses 50 upward</td><td>Bullish div at start</td><td>Buy small, confirm W2</td></tr>
+        <tr class="hl"><td style="color:var(--red);">Wave 2</td><td>40–50</td><td>Pulls back, holds 40</td><td>Doesn't break below 40</td><td>Add to longs at 61.8% Fib</td></tr>
+        <tr><td style="color:var(--cyan);">Wave 3</td><td>70–85+</td><td>Extreme OB, stays OB</td><td>Highest RSI in cycle</td><td>Maximum long, no shorting</td></tr>
+        <tr class="hl"><td style="color:var(--org);">Wave 4</td><td>40–60</td><td>Oscillates neutral</td><td>Hidden bull divergence</td><td>Hold longs, add at support</td></tr>
+        <tr><td style="color:var(--prp);">Wave 5</td><td>60–72</td><td>LOWER than Wave 3</td><td>Bearish divergence vs W3</td><td>Exit longs, prepare short</td></tr>
+        <tr class="hl"><td style="color:var(--red);">Wave A</td><td>35–50</td><td>Breaks below 50</td><td>First break of 50</td><td>Exit remaining longs</td></tr>
+        <tr><td style="color:var(--blue);">Wave B</td><td>50–65</td><td>Bounces, fails 65</td><td>Lower than prior W5 RSI</td><td>Short B wave peak</td></tr>
+        <tr class="hl"><td style="color:var(--red);">Wave C</td><td>20–40</td><td>Oversold + BULL DIV</td><td>Higher RSI vs Wave A</td><td>Buy Wave C low aggressively</td></tr>
+        <tr><td style="color:var(--irr1);">★ Irregular B</td><td>65–80</td><td>Reaches OB again — like W3!</td><td>3-wave structure = still corrective</td><td>Fade B wave peak after 3-wave confirms</td></tr>
+        <tr class="hl"><td style="color:var(--irr1);">★ Irregular Failure C</td><td>40–50</td><td>NEVER reaches oversold</td><td>RSI failure = trend resuming</td><td>Enter in trend direction immediately</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- WAVE SIGNATURES -->
+  <div id="rsi-signatures" class="ic">
+    <div class="al al-gold"><span>★</span><span>Each of the 5 motive waves has a distinct, repeatable RSI pattern. Memorize these signatures and you'll have a second independent confirmation system to validate your EW count in real time.</span></div>
+
+    <div style="display:flex;flex-direction:column;gap:14px;margin-top:16px;">
+      <div class="card" style="border-color:rgba(61,220,132,.25);">
+        <div class="g2">
+          <div>
+            <h3 style="color:var(--grn);">Wave 1 — RSI: 45→65 · The Recovery</h3>
+            <div class="rule r-grn">RSI rises from the oversold/neutral zone (30–50) to roughly 55–68 gradually</div>
+            <div class="rule r-grn">RSI does NOT reach overbought (70+) — the move lacks crowd conviction</div>
+            <div class="rule r-grn">May show BULLISH DIVERGENCE at start vs prior lows — momentum building</div>
+            <div class="rule r-gold">Price breaks a minor downtrend line while RSI crosses above 50 from below</div>
+            <div class="rule r-warn">If RSI immediately surges to 75+ → may already be Wave 3 of a larger degree</div>
+          </div>
+          <div>
+            <h4 style="color:var(--grn);font-size:12px;margin-bottom:8px;">How to Identify in Real Time</h4>
+            <ul class="chk">
+              <li>RSI crosses above 50 from below — key confirmation</li>
+              <li>RSI was in oversold territory (sub-30 or sub-40) just before</li>
+              <li>Volume picks up slightly but not dramatically</li>
+              <li>Sentiment: still bearish — analysts call it a "dead cat bounce"</li>
+              <li>Bullish RSI divergence at the start (price lower low, RSI higher low)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="border-color:rgba(240,64,96,.25);">
+        <div class="g2">
+          <div>
+            <h3 style="color:var(--red);">Wave 2 — RSI: drops to 40–50 · The Reset</h3>
+            <div class="rule r-red">RSI pulls back but HOLDS above 40 in bull markets — this is the key confirmation</div>
+            <div class="rule r-red">RSI often makes a HIGHER LOW vs the prior wave low = hidden bullish structure</div>
+            <div class="rule r-gold">Does not cross back into bear territory (below 35–40) — trend intact</div>
+            <div class="rule r-grn">The bounce off RSI 40–45 with price near Fib 61.8% = highest conviction W3 entry</div>
+          </div>
+          <div>
+            <h4 style="color:var(--red);font-size:12px;margin-bottom:8px;">W2 RSI Warning Signs</h4>
+            <ul class="chk">
+              <li>RSI breaks below 40 and stays there → W2 may be deeper than expected</li>
+              <li>RSI breaks below 30 → likely NOT Wave 2, recount the structure</li>
+              <li>Internal: wave a of W2 drops RSI sharply; wave b bounces it; wave c of W2 makes a higher RSI low = bullish div within W2</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="border-color:rgba(0,221,200,.25);">
+        <div class="g2">
+          <div>
+            <h3 style="color:var(--cyan);">Wave 3 — RSI: 70–85+ · The Surge</h3>
+            <div class="rule r-cyan">RSI reaches 70+ and STAYS overbought for extended periods — the defining W3 trait</div>
+            <div class="rule r-cyan">Highest RSI reading of the entire impulse — this is the reference peak</div>
+            <div class="rule r-cyan">RSI may spike to 80–85+ in strong commodity W3s, especially the ③ of ③</div>
+            <div class="rule r-gold">If RSI never reaches 70+ on what you've labeled W3 → likely not W3, recount</div>
+            <div class="rule r-grn">MACD histogram at its highest during W3 — confirms with RSI simultaneously</div>
+          </div>
+          <div>
+            <h4 style="color:var(--cyan);font-size:12px;margin-bottom:8px;">③ of ③ RSI Behavior</h4>
+            <ul class="chk">
+              <li>RSI may reach 85–90+ in the sub-wave 3 of Wave 3 (③ of ③)</li>
+              <li>Any RSI pullback during W3 is brief and shallow (stays above 60)</li>
+              <li>RSI pauses between sub-wave 3 and sub-wave 5 of W3</li>
+              <li>Do NOT short when RSI is above 70 in a bull trend — this is Wave 3 territory</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="border-color:rgba(255,138,48,.25);">
+        <div class="g2">
+          <div>
+            <h3 style="color:var(--org);">Wave 4 — RSI: 40–60 · The Cooldown</h3>
+            <div class="rule r-org">RSI normalizes from the overbought zone into neutral territory (40–60)</div>
+            <div class="rule r-org">RSI oscillates in a NARROWING RANGE if W4 forms a triangle (45–62 → 48–58 → 50–55)</div>
+            <div class="rule r-gold">RSI holds above 40 in a healthy bull trend — if it breaks 40, W4 may be deeper</div>
+            <div class="rule r-grn">HIDDEN BULLISH DIVERGENCE: price makes lower low in W4, RSI makes HIGHER low → W5 coming</div>
+          </div>
+          <div>
+            <h4 style="color:var(--org);font-size:12px;margin-bottom:8px;">Triangle W4 RSI Pattern</h4>
+            <ul class="chk">
+              <li>During triangle Wave 4: RSI oscillates between 45–62 in a narrowing range</li>
+              <li>RSI trendline within the triangle also converges</li>
+              <li>Triangle thrust: RSI breaks out of this narrow range → surge to 65–70+</li>
+              <li>Hidden bullish div at W4 end = very high conviction W5 entry</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="border-color:rgba(168,112,255,.25);">
+        <div class="g2">
+          <div>
+            <h3 style="color:var(--prp);">Wave 5 — RSI: 60–72 · The Divergence</h3>
+            <div class="rule r-prp">RSI rises but BELOW the Wave 3 high — this is the defining bearish divergence</div>
+            <div class="rule r-warn">Price makes NEW HIGH but RSI makes LOWER HIGH → W5 completing = the warning</div>
+            <div class="rule r-prp">RSI may only reach 62–68 even as price makes new all-time highs</div>
+            <div class="rule r-red">Multiple sub-waves within W5 show progressive RSI deterioration = blow-off top ending</div>
+          </div>
+          <div>
+            <h4 style="color:var(--prp);font-size:12px;margin-bottom:8px;">W5 Warning Checklist</h4>
+            <ul class="chk">
+              <li>RSI diverging from price highs — confirm on 2+ timeframes</li>
+              <li>Volume declining even as price makes new highs</li>
+              <li>Ending diagonal forming = each sub-wave RSI peak lower</li>
+              <li>MACD histogram declining while price rising = dual divergence</li>
+              <li>RSI divergence alone is NOT enough — needs Fib confluence</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORRECTIVE RSI -->
+  <div id="rsi-corrective" class="ic">
+    <div class="al al-gold"><span>ℹ</span><span>Corrective waves have their own RSI character. The A-B-C sequence produces a recognizable RSI "W-shape" or inverted pattern that confirms the correction is in progress and signals when it's ending.</span></div>
+    <div class="g2" style="margin-top:16px;">
+      <div>
+        <div class="card" style="border-color:rgba(240,64,96,.25);">
+          <h3 style="color:var(--red);">Wave A — RSI: First Break of 50</h3>
+          <div class="rule r-red">RSI drops below 50 for the first time in the bull trend — the correction signal</div>
+          <div class="rule r-red">RSI often reaches 35–45 at Wave A low — depends on depth</div>
+          <div class="rule r-gold">If Wave A is a 5-wave decline: RSI may reach 30–35 (zigzag forming)</div>
+          <div class="rule r-blue">If Wave A is a 3-wave decline: RSI only drops to 40–45 (flat forming)</div>
+        </div>
+        <div class="card" style="border-color:rgba(74,168,248,.25);margin-top:14px;">
+          <h3 style="color:var(--blue);">Wave B — RSI: The Failed Recovery</h3>
+          <div class="rule r-blue">RSI bounces to 50–65 — a relief rally that looks like the uptrend resuming</div>
+          <div class="rule r-blue">RSI is LOWER than Wave 5 RSI peak — key bearish signal</div>
+          <div class="rule r-warn">HIDDEN BEARISH DIVERGENCE: B makes higher price than A start, RSI makes higher RSI → B wave top</div>
+          <div class="rule r-irr">★ IRREGULAR B: RSI reaches 65–80 (OB!) — looks like Wave 3! But 3-wave sub-structure reveals it's corrective</div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="border-color:rgba(240,64,96,.25);">
+          <h3 style="color:var(--red);">Wave C — RSI: Oversold + Bullish Divergence</h3>
+          <div class="rule r-red">RSI drops to 20–35 — oversold zone signals C wave approaching end</div>
+          <div class="rule r-grn">BULLISH DIVERGENCE: C makes lower price than A, but RSI is HIGHER than Wave A RSI → correction completing</div>
+          <div class="rule r-gold">This bullish divergence + RSI at 25–35 + Fibonacci support = highest conviction buy in EW</div>
+          <div class="rule r-irr">★ IRREGULAR FAILURE C: RSI NEVER reaches oversold (stays 40–50) → C has failed → trend resuming NOW</div>
+        </div>
+        <div class="card" style="margin-top:14px;">
+          <h3 style="font-size:14px;">RSI Zone Shift — Bull vs Bear</h3>
+          <table class="tbl" style="font-size:11px;">
+            <tr><th>Market</th><th>RSI Support</th><th>RSI Resistance</th><th>Key Level</th></tr>
+            <tr class="hl"><td>Bull Market</td><td class="tv">40–50 (W2/W4)</td><td>70–80 (W3/W5)</td><td>50 = key support</td></tr>
+            <tr><td>Bear Market</td><td class="tv">20–30 (W3/W5)</td><td>50–60 (W2/W4)</td><td>50 = key resistance</td></tr>
+            <tr class="hl"><td>Transition</td><td class="tv">30–40</td><td>55–65</td><td>RSI rejects 60 → bear confirmed</td></tr>
+            <tr><td style="color:var(--irr1);">★ Irregular</td><td class="tv">Never reaches expected OS</td><td>Often reaches OB (B wave)</td><td>RSI failure zones = signals</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIVERGENCE -->
+  <div id="rsi-divergence" class="ic">
+    <div class="al al-gold"><span>★</span><span>Divergence is where RSI and Elliott Waves become a POWER COMBINATION. Each major wave transition in EW has a corresponding divergence signal. Learn these and you'll anticipate wave completions before they happen.</span></div>
+    <div class="g2" style="margin:16px 0;">
+      <div class="card" style="border-color:rgba(61,220,132,.3);">
+        <h3 style="color:var(--grn);">Bullish Divergence — Wave Endings</h3>
+        <div class="rule r-grn"><strong>Price: Lower Low | RSI: Higher Low</strong><br>Momentum declining faster than price. Exhaustion of downtrend.</div>
+        <hr>
+        <div style="font-size:10px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Where it appears in EW</div>
+        <ul class="chk">
+          <li><strong style="color:var(--grn);">Start of Wave 1:</strong> Price makes final low of downtrend but RSI already higher than prior swing low → Wave 1 beginning</li>
+          <li><strong style="color:var(--red);">End of Wave C:</strong> Wave C makes lower price than Wave A, RSI is higher → ABC correction completing, new impulse starting</li>
+          <li><strong>End of Wave 2:</strong> Double bottom structure — second bottom has higher RSI → Wave 2 done</li>
+          <li><strong>End of Wave 4:</strong> Multiple touches of support with RSI improving → coiling for Wave 5</li>
+        </ul>
+      </div>
+      <div class="card" style="border-color:rgba(240,64,96,.3);">
+        <h3 style="color:var(--red);">Bearish Divergence — Wave Peaks</h3>
+        <div class="rule r-red"><strong>Price: Higher High | RSI: Lower High</strong><br>Momentum cannot keep pace with new price highs. Exhaustion of uptrend.</div>
+        <hr>
+        <div style="font-size:10px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Where it appears in EW</div>
+        <ul class="chk">
+          <li><strong style="color:var(--prp);">Wave 3 → Wave 5:</strong> The classic. Wave 5 makes higher price, RSI lower than Wave 3 → Wave 5 completing, correction imminent</li>
+          <li><strong style="color:var(--blue);">Wave A → Wave B:</strong> B wave makes higher price than prior wave but RSI lower → false rally, Wave C to follow</li>
+          <li><strong>Ending Diagonal:</strong> Each sub-wave makes new highs with progressively lower RSI → powerful reversal coming</li>
+          <li><strong>5th extension:</strong> Multiple sub-waves of Wave 5 show progressive RSI deterioration → blow-off top ending</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <h3 style="color:var(--ylw);">Hidden Divergence — Trend Continuation Confirmation</h3>
+      <div class="g2">
+        <div>
+          <div class="rule r-gold"><strong>Bullish Hidden:</strong> Price makes Higher Low | RSI makes Lower Low → Uptrend stronger than RSI suggests. Seen in Wave 4 corrections. Wave 4 completing, Wave 5 coming.</div>
+          <div class="rule r-gold" style="margin-top:8px;"><strong>Bearish Hidden:</strong> Price makes Lower High | RSI makes Higher High → Downtrend stronger than RSI suggests. Seen in Wave B within bear correction.</div>
+        </div>
+        <div class="al al-blue"><span>💡</span><span>Hidden divergence is a CONTINUATION signal, not a reversal signal. Hidden bullish divergence in what you've labeled Wave 4 CONFIRMS the larger trend is intact and Wave 5 will follow. Very high confidence entry.</span></div>
+      </div>
+    </div>
+    <div class="cw">
+      <h5>Divergence Summary — All Types</h5>
+      <table class="tbl" style="font-size:11px;">
+        <tr><th>Divergence Type</th><th>Price</th><th>RSI</th><th>Wave Signal</th><th>Trade</th></tr>
+        <tr class="hl"><td style="color:var(--grn);">Regular Bullish</td><td>Lower low</td><td>Higher low</td><td>W2 end, W4 end, Wave C end</td><td>Buy — reversal up</td></tr>
+        <tr><td style="color:var(--red);">Regular Bearish</td><td>Higher high</td><td>Lower high</td><td>W5 end, Wave B peak</td><td>Sell — reversal down</td></tr>
+        <tr class="hl"><td style="color:var(--cyan);">Hidden Bullish</td><td>Higher low</td><td>Lower low</td><td>W4 pullback in bull trend</td><td>Hold/add — continuation up</td></tr>
+        <tr><td style="color:var(--org);">Hidden Bearish</td><td>Lower high</td><td>Higher high</td><td>B wave peak in bear</td><td>Hold/add — continuation down</td></tr>
+        <tr class="hl"><td style="color:var(--irr1);">★ Irregular B</td><td>Higher high (new extreme)</td><td>Lower than W5 peak</td><td>Irregular B top</td><td>Fade B wave — C incoming</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- WAVE FINDER -->
+  <div id="rsi-finder" class="ic">
+    <div class="al al-gold"><span>★</span><span>This is the practical framework to open any chart and systematically identify the current wave using EW structure + RSI together. Follow these 6 steps in order.</span></div>
+    <div style="display:flex;flex-direction:column;gap:12px;margin:16px 0;">
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--surf);border:1px solid var(--bdr);border-radius:8px;border-left:3px solid var(--gold);">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;">1</div>
+        <div><strong style="color:var(--gold);">Determine the Trend Phase (Motive or Corrective)</strong><br><span style="font-size:11.5px;color:var(--dim);">Look at the RSI range. Is it oscillating mostly above 50 (bull trend) or below 50 (bear/correction)? Motive waves = RSI range 40–90. Corrective waves = RSI range 10–60. This tells you whether to look for a 5-wave or 3-wave structure.</span></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--surf);border:1px solid var(--bdr);border-radius:8px;border-left:3px solid var(--cyan);">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--cyan);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;">2</div>
+        <div><strong style="color:var(--cyan);">Identify the RSI Peaks and Troughs</strong><br><span style="font-size:11.5px;color:var(--dim);">Mark every significant RSI high and low. In a bull impulse: RSI highs at W1 peak, W3 peak (highest), W5 peak (lower than W3), and RSI lows at W2 (40–50) and W4 (40–55). Count these — do they match a 5-wave structure?</span></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--surf);border:1px solid var(--bdr);border-radius:8px;border-left:3px solid var(--prp);">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--prp);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;">3</div>
+        <div><strong style="color:var(--prp);">Find the RSI Divergences</strong><br><span style="font-size:11.5px;color:var(--dim);">Look for: (a) Bearish divergence between the two highest price peaks → identifies W3 and W5. (b) Bullish divergence at the two lowest price troughs → identifies Wave C end or Wave 2 end.</span></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--surf);border:1px solid var(--bdr);border-radius:8px;border-left:3px solid var(--grn);">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--grn);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;">4</div>
+        <div><strong style="color:var(--grn);">Match RSI Behavior to Wave Characteristics</strong><br><span style="font-size:11.5px;color:var(--dim);">Apply the signature check: W3 = extreme RSI (75–85). W2/W4 = RSI 40–55. W5 = RSI lower than W3. Correctives: A drops below 50, B bounces to 50–65 and fails, C drops to 20–40.</span></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--surf);border:1px solid var(--bdr);border-radius:8px;border-left:3px solid var(--org);">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--org);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;">5</div>
+        <div><strong style="color:var(--org);">Validate with Price Structure and Fibonacci</strong><br><span style="font-size:11.5px;color:var(--dim);">Cross-check RSI signals with EW price rules (W2 must not exceed W1 start, W3 cannot be shortest, W4 must not overlap W1) then apply Fibonacci. Triple confirmation: Price structure + Fibonacci + RSI signature = high conviction count.</span></div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--surf);border:1px solid var(--bdr);border-radius:8px;border-left:3px solid var(--irr1);">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--irr1);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;">6</div>
+        <div><strong style="color:var(--irr1);">Determine Current Wave and Next Move</strong><br><span style="font-size:11.5px;color:var(--dim);">RSI neutral (40–55) after overbought → likely Wave 4. RSI diverging from price highs → likely Wave 5 completing. RSI at extreme low with bullish divergence → Wave C completing, new impulse starting. RSI never reached OS despite C label → Irregular Failure C → buy immediately.</span></div>
+      </div>
+    </div>
+    <div class="cw">
+      <h5>Quick Decision Tree — "Which Wave Am I In?"</h5>
+      <table class="tbl" style="font-size:11px;">
+        <tr><th>RSI Condition</th><th>Wave Identification</th><th>Action</th></tr>
+        <tr class="hl"><td>RSI above 70 and STAYING there</td><td style="color:var(--cyan);">You are in Wave 3</td><td>Do NOT short. Stay long, trail stops.</td></tr>
+        <tr><td>RSI 40–55 after being above 70</td><td style="color:var(--org);">You are in Wave 4</td><td>Look for bounce entry. Check for triangle.</td></tr>
+        <tr class="hl"><td>RSI 60–70 with price new high, BELOW prior RSI high</td><td style="color:var(--prp);">You are in Wave 5</td><td>Tighten stops. Look for divergence completion.</td></tr>
+        <tr><td>RSI just broke BELOW 50 from above</td><td style="color:var(--red);">Wave A may have begun</td><td>Exit longs. Watch for Wave B bounce to 50–60.</td></tr>
+        <tr class="hl"><td>RSI 20–35 with bullish divergence vs prior low</td><td style="color:var(--grn);">Wave C likely completing</td><td>Prime entry zone for new Wave 1. Best buy in EW+RSI.</td></tr>
+        <tr><td>RSI 45–60 for extended time (narrowing range)</td><td style="color:var(--org);">You are in a Triangle (Wave 4 or Wave B)</td><td>Wait for RSI breakout above 60 for thrust signal.</td></tr>
+        <tr class="hl"><td>RSI reaches OB (65–80) in a "C" wave area</td><td style="color:var(--irr1);">★ Possible Irregular B wave</td><td>Count sub-waves — if 3 waves → fade it. C incoming.</td></tr>
+        <tr><td>RSI never reaches OS during C wave</td><td style="color:var(--irr1);">★ Irregular Failure C</td><td>Enter in trend direction NOW. Very powerful continuation.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- FALSE SIGNALS -->
+  <div id="rsi-traps" class="ic">
+    <div class="al al-warn"><span>⚠</span><span>RSI alone is not enough. Understanding when RSI gives misleading signals in EW context is as important as knowing the true signals. These are the most common RSI traps that cause traders to misread the wave count.</span></div>
+    <div class="g2" style="margin-top:16px;">
+      <div>
+        <div class="failbox">
+          <h4>Trap 1 — Premature Divergence in Wave 3</h4>
+          <p>During a powerful Wave 3, RSI may briefly pull back and create a false "bearish divergence" within the W3 sub-waves. This is NOT a real divergence — it's the sub-wave 4 correction within W3. True bearish divergence only counts between WAVE 3 and WAVE 5 peaks, not within Wave 3 itself.</p>
+        </div>
+        <div class="failbox">
+          <h4>Trap 2 — Wave B Looks Like Wave 3</h4>
+          <p>In irregular and expanded flats, the B wave can push RSI to overbought (65–80+), making it look like a new Wave 3 impulse. The solution: count the sub-waves. If the "rally" only has 3 sub-waves, it's a B wave regardless of how high RSI goes. Always count before trading.</p>
+        </div>
+        <div class="failbox">
+          <h4>Trap 3 — Overbought in a Downtrend</h4>
+          <p>In bear markets, RSI "overbought" means 50–60, NOT 70. Using bull-market RSI thresholds (70 = overbought) in a bear market will cause you to hold short too long and miss the Wave 2 bounce. Always calibrate OB/OS thresholds to the trend direction.</p>
+        </div>
+      </div>
+      <div>
+        <div class="failbox">
+          <h4>Trap 4 — Extended Wave 5 and No Divergence</h4>
+          <p>When Wave 5 is itself extending (rare), RSI may actually EXCEED the Wave 3 reading briefly. This happens in commodity blow-offs. The solution: check Wave 5 sub-wave structure. If W5 is forming an ending diagonal internally, the divergence will appear within the diagonal's sub-waves even if not vs W3.</p>
+        </div>
+        <div class="failbox">
+          <h4>Trap 5 — Missing Irregular Failure</h4>
+          <p>If you expect Wave C to reach OS on RSI and it doesn't (RSI stays 40–50 despite price declining), most traders wait for "more selling" — missing the actual reversal. Irregular Failure C is defined by RSI NOT reaching oversold. The failure to reach OS IS the signal.</p>
+        </div>
+        <div class="solbox">
+          <h4>RSI Filter Rules</h4>
+          <ul class="chk">
+            <li>Never trade RSI divergence without Fibonacci confluence at the same level</li>
+            <li>Confirm divergence on at least 2 timeframes before acting</li>
+            <li>In a Wave 3, no matter how high RSI goes — do not short</li>
+            <li>Always count sub-waves before deciding B wave vs new impulse</li>
+            <li>For irregular detection: watch for RSI NOT reaching expected extremes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRADE SETUPS -->
+  <div id="rsi-setups" class="ic">
+    <div class="al al-gold"><span>★</span><span>These are the highest-conviction EW + RSI trade setups. Each requires both Fibonacci AND RSI conditions to be met simultaneously. Do not trade on RSI alone or Fibonacci alone.</span></div>
+    <div class="g3" style="margin-top:16px;">
+      <div class="card" style="border-color:rgba(61,220,132,.3);">
+        <h3 style="color:var(--grn);font-size:14px;">Setup 1 — Wave 3 Entry</h3>
+        <div style="font-size:10px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Highest Conviction Buy</div>
+        <ul class="chk">
+          <li>Price at 61.8% Fib retrace of Wave 1</li>
+          <li>RSI at 40–50 zone (holding above 40)</li>
+          <li>RSI shows bullish divergence vs prior low</li>
+          <li>Bullish candle confirms (hammer, engulfing)</li>
+        </ul>
+        <hr>
+        <table class="tbl" style="font-size:10px;margin-top:8px;">
+          <tr><td>Stop</td><td style="color:var(--red);">Below Wave 1 start</td></tr>
+          <tr><td>Target 1</td><td style="color:var(--cyan);">1.618× W1 from W2 low</td></tr>
+          <tr><td>Target 2</td><td style="color:var(--cyan);">2.618× W1 from W2 low</td></tr>
+        </table>
+      </div>
+      <div class="card" style="border-color:rgba(240,64,96,.3);">
+        <h3 style="color:var(--red);font-size:14px;">Setup 2 — Wave C Short</h3>
+        <div style="font-size:10px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">B Wave Fade Trade</div>
+        <ul class="chk">
+          <li>Clear 3-wave B bounce confirmed</li>
+          <li>RSI at 50–65 on B peak (lower than W5 RSI)</li>
+          <li>RSI bearish divergence on B wave</li>
+          <li>Bearish candle at Fib B wave resistance</li>
+        </ul>
+        <hr>
+        <table class="tbl" style="font-size:10px;margin-top:8px;">
+          <tr><td>Stop</td><td style="color:var(--red);">Above B wave high</td></tr>
+          <tr><td>Target 1</td><td style="color:var(--cyan);">C = A (1.0× A from B low)</td></tr>
+          <tr><td>Target 2</td><td style="color:var(--cyan);">C = 1.618× A (expanded flat)</td></tr>
+        </table>
+      </div>
+      <div class="card" style="border-color:rgba(0,221,200,.3);">
+        <h3 style="color:var(--cyan);font-size:14px;">Setup 3 — Wave C End Buy</h3>
+        <div style="font-size:10px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Best Buy Signal in EW+RSI</div>
+        <ul class="chk">
+          <li>RSI at 20–35 (oversold zone)</li>
+          <li>RSI bullish divergence vs Wave A RSI</li>
+          <li>Price at C = A (1.0×) Fib target</li>
+          <li>5 sub-waves visible in Wave C</li>
+        </ul>
+        <hr>
+        <table class="tbl" style="font-size:10px;margin-top:8px;">
+          <tr><td>Stop</td><td style="color:var(--red);">Below C low</td></tr>
+          <tr><td>Target 1</td><td style="color:var(--cyan);">Wave 4 area of prior impulse</td></tr>
+          <tr><td>Target 2</td><td style="color:var(--cyan);">New all-time high (new cycle)</td></tr>
+        </table>
+      </div>
+      <div class="card" style="border-color:rgba(168,112,255,.3);">
+        <h3 style="color:var(--prp);font-size:14px;">Setup 4 — Wave 5 Short</h3>
+        <div style="font-size:10px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">RSI Divergence Short</div>
+        <ul class="chk">
+          <li>Clear RSI bearish divergence vs Wave 3</li>
+          <li>Price at W5 = W1 Fib target</li>
+          <li>RSI at 60–68 (below W3's 75–80)</li>
+          <li>Ending diagonal visible on lower timeframe</li>
+        </ul>
+        <hr>
+        <table class="tbl" style="font-size:10px;margin-top:8px;">
+          <tr><td>Stop</td><td style="color:var(--red);">Above W5 high</td></tr>
+          <tr><td>Target 1</td><td style="color:var(--cyan);">Wave 4 area</td></tr>
+          <tr><td>Target 2</td><td style="color:var(--cyan);">Wave 2 area</td></tr>
+        </table>
+      </div>
+      <div class="card" style="border-color:rgba(255,107,157,.3);">
+        <h3 style="color:var(--irr1);font-size:14px;">★ Setup 5 — Irregular Failure</h3>
+        <div style="font-size:10px;color:var(--irr1);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Most Explosive Setup</div>
+        <ul class="chk">
+          <li>RSI never reached oversold during C wave</li>
+          <li>C wave fails to reach A end (price evidence)</li>
+          <li>B wave exceeded A start (100%+)</li>
+          <li>C completed in 5 sub-waves but very short</li>
+        </ul>
+        <hr>
+        <table class="tbl" style="font-size:10px;margin-top:8px;">
+          <tr><td>Stop</td><td style="color:var(--red);">Below C wave low</td></tr>
+          <tr><td>Target 1</td><td style="color:var(--cyan);">Prior W5 high</td></tr>
+          <tr><td>Target 2</td><td style="color:var(--cyan);">W3 extension levels</td></tr>
+        </table>
+      </div>
+      <div class="card" style="border-color:rgba(255,208,64,.3);">
+        <h3 style="color:var(--ylw);font-size:14px;">Setup 6 — Ending Diagonal Reversal</h3>
+        <div style="font-size:10px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">High Probability Reversal</div>
+        <ul class="chk">
+          <li>Clear wedge (converging trendlines in trend direction)</li>
+          <li>5 waves within wedge, all sub-dividing as 3s</li>
+          <li>Each RSI peak LOWER than previous within wedge</li>
+          <li>Final W5 of diagonal RSI barely reaches 55–60</li>
+          <li>Price breaks lower wedge trendline, RSI crosses 50</li>
+        </ul>
+        <hr>
+        <table class="tbl" style="font-size:10px;margin-top:8px;">
+          <tr><td>Stop</td><td style="color:var(--red);">Above W5 high of diagonal</td></tr>
+          <tr><td>Target 1</td><td style="color:var(--cyan);">Start of W4 within diagonal</td></tr>
+          <tr><td>Target 2</td><td style="color:var(--cyan);">Start of entire diagonal</td></tr>
+          <tr><td>Speed</td><td style="color:var(--gold);">Returns to start in ~1/3 build time</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SECTION: WAVE MORPHING ═══════════════════════ -->
+<div id="sec-morph" class="sec">
+  <div class="st">Wave Morphing & Count Invalidation</div>
+  <div class="ss">When the Market Corrects Your Count</div>
+
+  <div class="al al-warn"><span>⚠</span><span>Wave counts must be flexible. Markets "morph" — what looks like one pattern often resolves into another. The key skill is identifying the morph EARLY, before it becomes a large loss. Track invalidation levels for every count.</span></div>
+
+  <div class="morph-grid">
+    <div class="morph-card">
+      <h3>Impulse 1-2 → A-B</h3>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:10px;">What was labeled Wave 1-2 may actually be Wave A-B of a correction.</div>
+      <div class="rule r-warn">The "Wave 3" sub-divides into only 3 waves (not 5)</div>
+      <div class="rule r-warn">"Wave 3" retraces more than 100% of "Wave 1"</div>
+      <div class="rule r-warn">The correction seems too deep for a W2</div>
+      <div style="margin-top:10px;font-size:11px;">Action: Re-label W1=A, W2=B, the move becomes Wave C of a corrective structure.</div>
+    </div>
+    <div class="morph-card">
+      <h3>Regular Flat → Irregular Flat</h3>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:10px;">B wave extends further than expected.</div>
+      <div class="rule r-irr">B wave exceeds 100% of A and continues past 130%</div>
+      <div class="rule r-irr">Momentum in B wave looks like a new impulse</div>
+      <div class="rule r-irr">B sub-divides in 3 — confirms it's still corrective</div>
+      <div style="margin-top:10px;font-size:11px;">Action: Relabel as irregular flat. C target now extends to 1.236–1.618 × A from B extreme.</div>
+    </div>
+    <div class="morph-card">
+      <h3>Flat → Irregular Failure</h3>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:10px;">C wave fails to complete its expected journey.</div>
+      <div class="rule r-irr">C wave stalls well before reaching the end of A</div>
+      <div class="rule r-irr">RSI never reaches oversold zone during "C"</div>
+      <div class="rule r-irr">Volume in C is unexpectedly thin</div>
+      <div style="margin-top:10px;font-size:11px;">Action: Relabel as irregular failure. The primary trend is resuming — enter in trend direction immediately.</div>
+    </div>
+    <div class="morph-card">
+      <h3>Simple Correction → Complex</h3>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:10px;">Zigzag extends into double or triple.</div>
+      <div class="rule r-warn">After a complete A-B-C, market continues sideways</div>
+      <div class="rule r-warn">A new X wave starts, bouncing from the C low</div>
+      <div class="rule r-warn">Correction taking far longer than expected</div>
+      <div style="margin-top:10px;font-size:11px;">Action: Relabel first correction as W. Wait for the Y wave to complete before trend entry.</div>
+    </div>
+    <div class="morph-card">
+      <h3>Wave 5 → Wave 3 of Larger</h3>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:10px;">Market refuses to correct — degree mismatch.</div>
+      <div class="rule r-warn">After "Wave 5," the correction is tiny (only 23.6%)</div>
+      <div class="rule r-warn">Price quickly resumes trend with new highs</div>
+      <div class="rule r-warn">The "correction" acts like a Wave 4, not an A-B-C reversal</div>
+      <div style="margin-top:10px;font-size:11px;">Action: Promote the degree — the "complete cycle" is actually a sub-structure of a larger Wave 3.</div>
+    </div>
+    <div class="morph-card">
+      <h3>Flat → Running Correction</h3>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:10px;">The most explosive morph — entire correction stays above A start.</div>
+      <div class="rule r-irr">B wave far exceeds A start (150%+ of A)</div>
+      <div class="rule r-irr">C wave cannot even return to the A start level</div>
+      <div class="rule r-irr">Entire structure is compressed and running in trend direction</div>
+      <div style="margin-top:10px;font-size:11px;">Action: Relabel as running correction. This is the most bullish corrective signal — enter in trend direction at the C completion.</div>
+    </div>
+  </div>
+
+  <div class="cw" style="margin-top:24px;">
+    <h5>The Alternation Matrix — Wave 2 vs Wave 4 Form</h5>
+    <table class="tbl">
+      <tr><th>If Wave 2 is…</th><th>Expect Wave 4 to be…</th><th>Logic</th></tr>
+      <tr class="hl"><td>Sharp Zigzag (fast, deep)</td><td class="tv">Flat or Triangle (slow, shallow)</td><td>Alternation — contrasting form</td></tr>
+      <tr><td>Flat (sideways, shallow)</td><td class="tv">Sharp Zigzag (fast, deep)</td><td>Alternation — contrasting form</td></tr>
+      <tr class="hl"><td>Simple (single pattern)</td><td class="tv">Complex (double/triple)</td><td>Alternation in complexity</td></tr>
+      <tr><td>Quick (few bars)</td><td class="tv">Time-consuming (many bars)</td><td>Alternation in time</td></tr>
+      <tr class="hl"><td>Deep retrace (61.8–78.6%)</td><td class="tv">Shallow retrace (23.6–38.2%)</td><td>Alternation in depth</td></tr>
+      <tr><td style="color:var(--irr1);">★ Irregular Flat</td><td class="tv" style="color:var(--irr1);">Likely a simple zigzag or triangle</td><td>Alternation after irregular</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SECTION: DEGREES ═══════════════════════ -->
+<div id="sec-degrees" class="sec">
+  <div class="st">Wave Degrees — The Fractal Scale</div>
+  <div class="ss">From Subminuette to Grand Supercycle</div>
+
+  <div class="al al-gold"><span>ℹ</span><span>Every wave belongs to a "degree" — a size classification. The same 5-3 pattern (with all its irregular and regular variants) repeats at every degree. What looks like a single candlestick on a daily chart contains a complete 5-wave impulse on a 1-minute chart.</span></div>
+
+  <div class="deg-scale" style="margin:24px 0;">
+    <div class="deg-item"><div class="dn">Grand Super</div><div class="dt">Centuries</div><div class="ds">[I][II]</div></div>
+    <div class="deg-item"><div class="dn">Supercycle</div><div class="dt">Decades</div><div class="ds">(I)(II)</div></div>
+    <div class="deg-item"><div class="dn">Cycle</div><div class="dt">Years</div><div class="ds">I II</div></div>
+    <div class="deg-item"><div class="dn">Primary</div><div class="dt">Months–Years</div><div class="ds">①②</div></div>
+    <div class="deg-item"><div class="dn">Intermediate</div><div class="dt">Weeks–Months</div><div class="ds">(1)(2)</div></div>
+    <div class="deg-item"><div class="dn">Minor</div><div class="dt">Days–Weeks</div><div class="ds">1 2</div></div>
+    <div class="deg-item"><div class="dn">Minute</div><div class="dt">Hours–Days</div><div class="ds">i ii</div></div>
+    <div class="deg-item"><div class="dn">Minuette</div><div class="dt">Minutes</div><div class="ds">① ②</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <h3>Multi-Timeframe Analysis</h3>
+      <ul class="chk">
+        <li><strong>Higher degree</strong> sets direction — always trade WITH the higher degree trend</li>
+        <li>Use Monthly/Weekly for Cycle degree waves (I, II, III, IV, V)</li>
+        <li>Use Daily for Primary degree waves (①②③④⑤)</li>
+        <li>Use 4H for Intermediate degree waves (1)(2)(3)(4)(5)</li>
+        <li>Use 1H for Minor degree waves 1 2 3 4 5</li>
+        <li>Use 15M for Minute degree waves i ii iii iv v</li>
+        <li>When 3 timeframes agree on direction → highest conviction trade</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>★ Irregular Waves & Degree Context</h3>
+      <div class="irrbox">
+        <h4>Irregular waves at higher degrees are most powerful</h4>
+        <p style="font-size:11.5px;line-height:1.7;">A Primary degree irregular flat (months-long B wave trap) will trap enormous capital. A Cycle degree running correction signals a generational bull market. The larger the degree of the irregular wave, the more powerful the signal for the next impulse.</p>
+      </div>
+      <div class="rule r-irr">Primary degree irregular W2 → look for W3 = 2.618–4.236 × W1</div>
+      <div class="rule r-irr">Intermediate irregular wave → explosive minor degree impulse follows</div>
+      <div class="rule r-gold">Always identify which degree irregular wave you are in before sizing position</div>
+    </div>
+  </div>
+
+  <div class="cw" style="margin-top:24px;">
+    <h5>Complete Pattern Summary — All Degrees</h5>
+    <table class="tbl" style="font-size:11px;">
+      <tr><th>Pattern</th><th>Structure</th><th>Position</th><th>Key Fib</th><th>Signal</th></tr>
+      <tr class="hl"><td class="tl">Impulse</td><td>5-5-5-5-5</td><td>Any motive wave</td><td>W3 = 1.618×W1</td><td>Follow the trend</td></tr>
+      <tr><td class="tl">Leading Diagonal</td><td>5-3-5-3-5</td><td>W1 or WA only</td><td>W3 = 0.618–1.0×W1</td><td>New trend starting</td></tr>
+      <tr class="hl"><td class="tl">Ending Diagonal</td><td>3-3-3-3-3</td><td>W5 or WC only</td><td>W3 = 0.618×W1</td><td>Reversal imminent</td></tr>
+      <tr><td class="tl">Zigzag</td><td>5-3-5</td><td>W2, WA, WX</td><td>C = 1.0×A</td><td>Sharp correction</td></tr>
+      <tr class="hl"><td class="tl">Flat (Regular)</td><td>3-3-5</td><td>W2, W4, WB</td><td>C = 1.0×A</td><td>Sideways correction</td></tr>
+      <tr><td class="tl">Expanded Flat</td><td>3-3-5</td><td>W2, W4, WB</td><td>C = 1.618×A</td><td>B new extreme then C crash</td></tr>
+      <tr class="hl"><td class="tl">Running Flat</td><td>3-3-5</td><td>W4 usually</td><td>C fails to reach A end</td><td>Very strong trend</td></tr>
+      <tr style="background:rgba(255,107,157,0.06);"><td style="color:var(--irr1);">★ Irregular Flat</td><td>3-3-5</td><td>W2, W4, WB</td><td>B &gt;1.38×A; C=1.0–1.618×A</td><td>B trap, surprise C</td></tr>
+      <tr style="background:rgba(199,125,255,0.06);"><td style="color:var(--irr2);">★ Irregular Failure</td><td>3-3-5</td><td>W5, WC</td><td>C fails, &lt;61.8% of A</td><td>Exhaustion → explosive reversal</td></tr>
+      <tr style="background:rgba(76,201,240,0.06);"><td style="color:var(--irr3);">★ Running Correction</td><td>3-3-5 or 5-3-5</td><td>W2, W4</td><td>Entire struct above/below A start</td><td>Most powerful continuation</td></tr>
+      <tr class="hl"><td class="tl">Triangle</td><td>3-3-3-3-3</td><td>W4, WB, WX</td><td>Each leg 0.618× prior</td><td>Thrust follows</td></tr>
+      <tr><td class="tl">Double Three</td><td>W-X-Y</td><td>W2, W4, WX</td><td>X = 0.382–0.618×W</td><td>Extended sideways</td></tr>
+      <tr class="hl"><td class="tl">Triple Three</td><td>W-X-Y-X-Z</td><td>Rare, any correction</td><td>Complex — very rare</td><td>Long consolidation</td></tr>
+    </table>
+  </div>
+
+  <div class="al al-gold" style="margin-top:20px;">
+    <span>★</span>
+    <span><strong>Master Practitioner Principle (Frost, Prechter, Neely, Caldaro):</strong> Count from RIGHT to LEFT. Start with what you can see clearly in the most recent price action, then work backward. Always maintain at least TWO valid counts simultaneously — including one that accounts for an irregular wave possibility. Let the market invalidate counts; never fight the tape to preserve a preferred count.</span>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
+  document.getElementById('sec-' + id).classList.add('on');
+  btn.classList.add('on');
+  // reset inner tabs
+  const sec = document.getElementById('sec-' + id);
+  sec.querySelectorAll('.itab').forEach((t,i) => t.classList.toggle('on', i === 0));
+  sec.querySelectorAll('.ic').forEach((c,i) => c.classList.toggle('on', i === 0));
+}
+
+function itab(btn, id) {
+  const wrap = btn.closest('.sec') || btn.closest('.mcard-body') || btn.parentElement;
+  const container = btn.closest('.sec') || document.body;
+  container.querySelectorAll('.itab').forEach(t => t.classList.remove('on'));
+  container.querySelectorAll('.ic').forEach(c => c.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById(id).classList.add('on');
+}
+
+// Expand/collapse wave cards
+document.querySelectorAll('.wcard').forEach(card => {
+  card.addEventListener('click', () => card.classList.toggle('open'));
+});
+</script>
+</body>
+</html>
